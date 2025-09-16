@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎩 Birthday Celebration 🎩</title>
+    <link rel="stylesheet" href="adult-male-styles.css" />
+  </head>
+  <body>
+    <!-- Header discret -->
+    <div class="header">🎩 Birthday Invitation System</div>
+
+    <!-- Ballons décoratifs -->
+    <div class="balloons">
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+    </div>
+
+    <!-- Canvas pour confettis -->
+    <canvas id="confetti"></canvas>
+
+    <!-- Invitation principale -->
+    <div class="invitation">
+      <h1 id="invitationTitle">🎊 Birthday Celebration 🎊</h1>
+
+      <div class="photo-container">
+        <img
+          id="guestPhoto"
+          src="https://via.placeholder.com/180x180/3f51b5/white?text=Photo"
+          alt="Birthday Guest"
+          class="guest-photo"
+        />
+        <div class="photo-decoration"></div>
+      </div>
+
+      <h2 id="invitationSubtitle">
+        Join us in celebrating
+        <span class="guest-name" id="guestName">Michael Johnson</span>'s
+        <span class="guest-age" id="guestAge">35th birthday</span>!
+      </h2>
+
+      <p class="invitation-subtitle" id="invitationDescription">
+        Come celebrate another great year of achievements.<br />
+        Let's raise a toast to continued success! 🥂
+      </p>
+
+      <div class="event-details">
+        <h3>📋 Event Details</h3>
+        <p>
+          <strong>📅 When:</strong>
+          <span id="eventDate">Saturday, September 13th, 2025</span>
+        </p>
+        <p>
+          <strong>🕕 Time:</strong>
+          <span id="eventTime">7:00 PM - 11:00 PM</span>
+        </p>
+        <p>
+          <strong>📍 Where:</strong>
+          <span id="eventAddress">80 Ridge Road, Cambridge, ON</span>
+        </p>
+        <p>
+          <strong>📞 Contact:</strong>
+          <span id="contactPhone">437-366-5289</span>
+        </p>
+        <p>
+          <strong>🎨 Theme:</strong> <span id="eventTheme">Smart Casual</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Section RSVP -->
+    <section class="rsvp">
+      <h2>Confirm Your Attendance</h2>
+      <form id="rsvpForm">
+        <label>Will you be joining us?</label>
+        <div class="presence-choice">
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="present"
+              name="presence"
+              value="present"
+              required
+            />
+            <label for="present">✅ Count me in!</label>
+          </div>
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="absent"
+              name="presence"
+              value="absent"
+              required
+            />
+            <label for="absent">❌ Can't make it this time</label>
+          </div>
+        </div>
+
+        <!-- Formulaire pour les présents -->
+        <div id="presentForm" class="hidden">
+          <label for="attendeeName">Your Name*</label>
+          <input
+            type="text"
+            id="attendeeName"
+            required
+            placeholder="Enter your full name"
+          />
+
+          <label for="attendeeEmail">Email (optional)</label>
+          <input
+            type="email"
+            id="attendeeEmail"
+            placeholder="your.email@example.com"
+          />
+
+          <label for="guestCount">Number of guests attending</label>
+          <input type="number" id="guestCount" min="1" value="1" />
+
+          <label for="dietaryRequirements">Dietary preferences/allergies</label>
+          <textarea
+            id="dietaryRequirements"
+            placeholder="Any dietary restrictions, allergies, or special requests..."
+          ></textarea>
+
+          <label for="specialMessage">Special message (optional)</label>
+          <textarea
+            id="specialMessage"
+            placeholder="Any special requests, song suggestions, or notes..."
+          ></textarea>
+        </div>
+
+        <!-- Formulaire pour les absents -->
+        <div id="absentForm" class="hidden">
+          <label for="attendeeNameAbsent">Your Name*</label>
+          <input
+            type="text"
+            id="attendeeNameAbsent"
+            required
+            placeholder="Enter your full name"
+          />
+
+          <label for="attendeeEmailAbsent">Email (optional)</label>
+          <input
+            type="email"
+            id="attendeeEmailAbsent"
+            placeholder="your.email@example.com"
+          />
+
+          <label for="absenceReason">Reason for absence</label>
+          <textarea
+            id="absenceReason"
+            required
+            placeholder="We'll miss you! Let us know why you can't join us..."
+          ></textarea>
+
+          <!-- Section cadeau -->
+          <div class="gift-section">
+            <label>Would you still like to send a gift?</label>
+            <div class="gift-choice">
+              <div class="radio-group">
+                <input type="radio" id="giftYes" name="gift" value="yes" />
+                <label for="giftYes">🎁 Absolutely!</label>
+              </div>
+              <div class="radio-group">
+                <input type="radio" id="giftNo" name="gift" value="no" />
+                <label for="giftNo">❌ Not this time</label>
+              </div>
+            </div>
+
+            <div id="giftDetails" class="hidden">
+              <label for="giftType">Type or nature of the gift</label>
+              <input
+                type="text"
+                id="giftType"
+                placeholder="Ex: Wine, tech gadget, sports equipment, experience gift..."
+              />
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          Send Confirmation 🎯
+        </button>
+      </form>
+
+      <!-- Messages -->
+      <div id="messageContainer"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <h3 id="footerTitle">Michael Johnson's 35th Birthday</h3>
+      <p>© 2025. Celebrated with Style.</p>
+      <p>📍 <span id="footerAddress">80 Ridge Road, Cambridge, ON</span></p>
+      <p>📞 Contact: <span id="footerPhone">437-366-5289</span></p>
+    </footer>
+
+    <script src="adult-male-script.js"></script>
+  </body>
+</html>

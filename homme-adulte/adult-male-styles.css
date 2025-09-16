@@ -1,0 +1,879 @@
+/* ================================
+   🎩 VARIABLES CSS THÈME HOMME
+   ================================ */
+
+:root {
+  --primary-color: #1a237e;
+  --secondary-color: #3f51b5;
+  --accent-color: #ff9800;
+  --background-color: #f5f7fa;
+  --text-color: #2c3e50;
+  --card-shadow: rgba(63, 81, 181, 0.3);
+  --border-radius: 12px;
+  --gradient-primary: linear-gradient(135deg, #1a237e, #3f51b5);
+  --gradient-secondary: linear-gradient(135deg, #ff9800, #ffc107);
+  --gradient-accent: linear-gradient(135deg, #37474f, #546e7a);
+}
+
+/* ================================
+   🔧 RESET ET STYLES DE BASE
+   ================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  background: var(--background-color);
+  background-image: linear-gradient(
+      135deg,
+      rgba(26, 35, 126, 0.05) 0%,
+      transparent 50%
+    ),
+    linear-gradient(45deg, rgba(63, 81, 181, 0.03) 0%, transparent 50%),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 152, 0, 0.1) 0%,
+      transparent 50%
+    );
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Fond avec motif professionnel subtil */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 35px,
+    rgba(26, 35, 126, 0.02) 35px,
+    rgba(26, 35, 126, 0.02) 70px
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Header avec logo discret */
+.header {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  color: #666;
+}
+
+/* ================================
+   🎉 CARTE D'INVITATION
+   ================================ */
+
+.invitation {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 35px var(--card-shadow);
+  padding: 50px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  margin: 40px auto;
+  border: 4px solid var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.invitation::before {
+  content: "🎩⚡🥂🎯🏆";
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  font-size: 50px;
+  opacity: 0.08;
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.invitation h1 {
+  font-size: 3rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 30px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 2;
+  animation: professional-glow 3s ease-in-out infinite;
+}
+
+@keyframes professional-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px rgba(63, 81, 181, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(63, 81, 181, 0.5));
+  }
+}
+
+.invitation h2 {
+  font-weight: 600;
+  font-size: 1.6rem;
+  margin-bottom: 25px;
+  color: var(--text-color);
+  line-height: 1.5;
+  position: relative;
+  z-index: 2;
+}
+
+.guest-name,
+.guest-age {
+  font-weight: 800;
+  color: var(--secondary-color);
+  text-shadow: 1px 1px 3px rgba(63, 81, 181, 0.3);
+}
+
+/* Photo */
+.photo-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.guest-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--secondary-color);
+  box-shadow: 0 15px 40px var(--card-shadow);
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.guest-photo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 50px rgba(63, 81, 181, 0.4);
+}
+
+.photo-decoration {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 230px;
+  height: 230px;
+  border: 4px solid var(--accent-color);
+  border-radius: 12px;
+  animation: professional-rotation 20s linear infinite;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+@keyframes professional-rotation {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+/* Éléments décoratifs autour de la photo */
+.photo-container::before,
+.photo-container::after {
+  position: absolute;
+  font-size: 22px;
+  animation: professional-float 4s ease-in-out infinite alternate;
+  color: var(--accent-color);
+  z-index: 3;
+}
+
+.photo-container::before {
+  content: "🥂";
+  top: 20px;
+  left: 30px;
+  animation-delay: 0s;
+}
+
+.photo-container::after {
+  content: "🎯";
+  top: 20px;
+  right: 30px;
+  animation-delay: 2s;
+}
+
+@keyframes professional-float {
+  0% {
+    opacity: 0.6;
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-10px) rotate(15deg);
+  }
+}
+
+.invitation-subtitle {
+  font-style: italic;
+  margin: 30px 0;
+  line-height: 1.6;
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 2;
+  font-weight: 500;
+}
+
+/* Détails de l'événement */
+.event-details {
+  margin-top: 40px;
+  position: relative;
+  z-index: 2;
+  background: rgba(26, 35, 126, 0.08);
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid var(--accent-color);
+}
+
+.event-details h3 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.event-details p {
+  margin: 15px 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.event-details strong {
+  color: var(--primary-color);
+  font-weight: 700;
+  display: inline-block;
+  min-width: 120px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ================================
+   📝 SECTION RSVP
+   ================================ */
+
+.rsvp {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 600px;
+  width: 100%;
+  margin: 30px auto;
+  box-shadow: 0 15px 50px var(--card-shadow);
+  border: 4px solid var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.rsvp::before {
+  content: "🍻🎪🎲🎸🏆";
+  position: absolute;
+  bottom: -10px;
+  left: -10px;
+  font-size: 40px;
+  opacity: 0.06;
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+
+.rsvp h2 {
+  color: var(--primary-color);
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
+}
+
+.rsvp label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 2;
+  font-size: 15px;
+}
+
+.rsvp input[type="text"],
+.rsvp input[type="email"],
+.rsvp input[type="number"],
+.rsvp textarea {
+  width: 100%;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 2px solid var(--secondary-color);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: white;
+  font-family: inherit;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+}
+
+.rsvp textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.rsvp input:focus,
+.rsvp textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.15);
+  transform: translateY(-2px);
+  background: linear-gradient(45deg, white, rgba(26, 35, 126, 0.02));
+}
+
+/* Boutons radio stylés */
+.presence-choice,
+.gift-choice {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 30px;
+  border-radius: 12px;
+  border: 3px solid var(--secondary-color);
+  background: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: 600;
+  min-width: 200px;
+  justify-content: center;
+}
+
+.radio-group:hover {
+  background: rgba(26, 35, 126, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(26, 35, 126, 0.25);
+}
+
+.radio-group input[type="radio"] {
+  width: 24px;
+  height: 24px;
+  accent-color: var(--primary-color);
+}
+
+.radio-group label {
+  margin-bottom: 0 !important;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text-color);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Section cadeau */
+.gift-section {
+  background: rgba(26, 35, 126, 0.06);
+  padding: 30px;
+  border-radius: 15px;
+  margin-top: 30px;
+  border: 2px solid var(--secondary-color);
+  position: relative;
+  z-index: 2;
+}
+
+.gift-section > label {
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 25px;
+  font-size: 1.2rem;
+}
+
+/* Bouton de soumission */
+.submit-btn {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 20px 0;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  width: 100%;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 30px rgba(26, 35, 126, 0.4);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s;
+}
+
+.submit-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(26, 35, 126, 0.5);
+}
+
+.submit-btn:hover::before {
+  left: 100%;
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Messages */
+.message {
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+  font-weight: 600;
+  text-align: center;
+  animation: slideIn 0.4s ease-out;
+}
+
+.message.success {
+  background: #f0fff4;
+  color: #276749;
+  border: 2px solid #9ae6b4;
+}
+
+.message.error {
+  background: #fee;
+  color: #c53030;
+  border: 2px solid #fed7d7;
+}
+
+.message.info {
+  background: #ebf8ff;
+  color: #3182ce;
+  border: 2px solid #90cdf4;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer */
+.footer {
+  margin-top: 50px;
+  padding: 30px;
+  text-align: center;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px var(--card-shadow);
+  max-width: 600px;
+  width: 100%;
+  border: 3px solid var(--secondary-color);
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: "🎩🥂🎯";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 35px;
+  opacity: 0.08;
+  transform: rotate(20deg);
+  pointer-events: none;
+}
+
+.footer h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+}
+
+.footer p {
+  margin: 8px 0;
+  font-weight: 500;
+  color: var(--text-color);
+  position: relative;
+  z-index: 2;
+}
+
+/* ================================
+   🎈 BALLONS SOPHISTIQUÉS
+   ================================ */
+
+.balloons {
+  position: fixed;
+  bottom: -120px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.balloon {
+  width: 45px;
+  height: 70px;
+  background: var(--secondary-color);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: absolute;
+  bottom: -100px;
+  animation: professionalFloat 14s linear infinite;
+  opacity: 0.8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.balloon:nth-child(1) {
+  background: #1a237e;
+  left: 15%;
+  animation-duration: 12s;
+  animation-delay: 0s;
+}
+.balloon:nth-child(2) {
+  background: #3f51b5;
+  left: 35%;
+  animation-duration: 14s;
+  animation-delay: 2s;
+}
+.balloon:nth-child(3) {
+  background: #ff9800;
+  left: 55%;
+  animation-duration: 16s;
+  animation-delay: 4s;
+}
+.balloon:nth-child(4) {
+  background: #37474f;
+  left: 75%;
+  animation-duration: 13s;
+  animation-delay: 1s;
+}
+.balloon:nth-child(5) {
+  background: #546e7a;
+  left: 25%;
+  animation-duration: 15s;
+  animation-delay: 3s;
+}
+.balloon:nth-child(6) {
+  background: #ffc107;
+  left: 65%;
+  animation-duration: 11s;
+  animation-delay: 5s;
+}
+.balloon:nth-child(7) {
+  background: #455a64;
+  left: 45%;
+  animation-duration: 13s;
+  animation-delay: 2.5s;
+}
+.balloon:nth-child(8) {
+  background: #283593;
+  left: 85%;
+  animation-duration: 14s;
+  animation-delay: 4.5s;
+}
+
+@keyframes professionalFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(-25vh) rotate(2deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-50vh) rotate(-2deg);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translateY(-75vh) rotate(1deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+/* Canvas confetti */
+#confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+}
+
+/* ================================
+   📱 RESPONSIVE DESIGN
+   ================================ */
+
+@media (max-width: 768px) {
+  .invitation,
+  .rsvp,
+  .footer {
+    padding: 30px 25px;
+    margin: 20px auto;
+  }
+
+  .invitation h1 {
+    font-size: 2.2rem;
+  }
+
+  .guest-photo {
+    width: 140px;
+    height: 140px;
+  }
+
+  .photo-decoration {
+    width: 180px;
+    height: 180px;
+  }
+
+  .presence-choice,
+  .gift-choice {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .radio-group {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .header {
+    position: static;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+
+  .invitation,
+  .rsvp,
+  .footer {
+    max-width: 100%;
+    padding: 25px;
+  }
+
+  .invitation h1 {
+    font-size: 2rem;
+  }
+
+  .rsvp h2 {
+    font-size: 1.6rem;
+  }
+
+  .presence-choice,
+  .gift-choice {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .radio-group {
+    justify-content: center;
+    padding: 12px 20px;
+  }
+
+  .guest-photo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .photo-decoration {
+    width: 150px;
+    height: 150px;
+  }
+
+  .photo-container::before,
+  .photo-container::after {
+    font-size: 16px;
+  }
+
+  .balloon {
+    width: 35px;
+    height: 55px;
+  }
+
+  .event-details p {
+    font-size: 1rem;
+  }
+}
+
+/* ================================
+   🌟 EFFETS VISUELS SOPHISTIQUÉS
+   ================================ */
+
+/* Effet de survol sophistiqué pour les cartes */
+.invitation:hover,
+.rsvp:hover {
+  transform: translateY(-5px) scale(1.01);
+}
+
+/* États de focus professionnels */
+input:focus,
+textarea:focus,
+select:focus {
+  background: linear-gradient(45deg, white, rgba(26, 35, 126, 0.02));
+}
+
+/* ================================
+   🎯 CLASSES UTILITAIRES
+   ================================ */
+
+.professional-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sophisticated {
+  border-left: 4px solid var(--accent-color);
+  padding-left: 15px;
+}
+
+.elegant-shadow {
+  box-shadow: 0 8px 25px rgba(26, 35, 126, 0.2);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Effet de brillance professionnelle */
+@keyframes professional-shine {
+  0%,
+  100% {
+    box-shadow: 0 10px 35px var(--card-shadow);
+  }
+  50% {
+    box-shadow: 0 15px 45px rgba(26, 35, 126, 0.4);
+  }
+}
+
+.invitation:hover {
+  animation: professional-shine 2s ease-in-out infinite;
+}
+
+/* Animations pour les effets spéciaux */
+@keyframes professionalFloat {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg) scale(0.8);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-8px) rotate(90deg) scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes rainbow-pulse {
+  0%,
+  100% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  25% {
+    filter: hue-rotate(90deg) brightness(1.1);
+  }
+  50% {
+    filter: hue-rotate(180deg) brightness(1.2);
+  }
+  75% {
+    filter: hue-rotate(270deg) brightness(1.1);
+  }
+}
