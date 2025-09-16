@@ -1,0 +1,889 @@
+/* style.css - Version dédiée HOMME ADULTE */
+
+/* ================================
+   🎩 VARIABLES CSS THÈME HOMME
+   ================================ */
+
+:root {
+  --primary-color: #1a237e;
+  --secondary-color: #3f51b5;
+  --accent-color: #ff9800;
+  --background-color: #f5f7fa;
+  --text-color: #2c3e50;
+  --card-shadow: rgba(63, 81, 181, 0.3);
+  --border-radius: 12px;
+  --gradient-primary: linear-gradient(135deg, #1a237e, #3f51b5);
+  --gradient-secondary: linear-gradient(135deg, #ff9800, #ffc107);
+  --gradient-accent: linear-gradient(135deg, #37474f, #546e7a);
+}
+
+/* ================================
+   🔧 RESET ET STYLES DE BASE
+   ================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+}
+
+body {
+  background: var(--background-color);
+  background-image: linear-gradient(
+      135deg,
+      rgba(26, 35, 126, 0.05) 0%,
+      transparent 50%
+    ),
+    linear-gradient(45deg, rgba(63, 81, 181, 0.03) 0%, transparent 50%),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 152, 0, 0.1) 0%,
+      transparent 50%
+    );
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ================================
+   ⚙️ PANNEAU DE CONFIGURATION
+   ================================ */
+
+.config-panel {
+  background: white;
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 6px 25px var(--card-shadow);
+  margin-bottom: 25px;
+  max-width: 600px;
+  width: 100%;
+  border: 2px solid var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.config-panel::before {
+  content: "🎩⚡🥂🎯🏆";
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  font-size: 50px;
+  opacity: 0.08;
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.config-panel h3 {
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.config-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.config-group {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.config-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.config-group input,
+.config-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background: white;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.config-group input:focus,
+.config-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+  transform: translateY(-1px);
+}
+
+.config-group select {
+  cursor: pointer;
+}
+
+/* ================================
+   🎉 CARTE D'INVITATION
+   ================================ */
+
+.invitation {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 35px var(--card-shadow);
+  padding: 40px;
+  max-width: 500px;
+  text-align: center;
+  margin-bottom: 30px;
+  border: 3px solid var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.invitation::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(26, 35, 126, 0.02) 25%,
+    rgba(63, 81, 181, 0.02) 50%,
+    rgba(255, 152, 0, 0.02) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.invitation h1 {
+  font-size: 2.5rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 25px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 2;
+}
+
+.invitation h2 {
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: var(--text-color);
+  line-height: 1.4;
+  position: relative;
+  z-index: 2;
+}
+
+.invitation .age,
+.invitation .name {
+  font-weight: 800;
+  color: var(--secondary-color);
+  text-shadow: 1px 1px 2px rgba(63, 81, 181, 0.2);
+}
+
+.invitation-subtitle {
+  font-style: italic;
+  margin: 25px 0;
+  line-height: 1.6;
+  color: var(--text-color);
+  position: relative;
+  z-index: 2;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.event-details {
+  margin-top: 30px;
+  position: relative;
+  z-index: 2;
+  background: rgba(26, 35, 126, 0.05);
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 4px solid var(--accent-color);
+}
+
+.event-details p {
+  margin: 10px 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.event-details strong {
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* ================================
+   📸 PHOTO ET DÉCORATION
+   ================================ */
+
+.photo-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.photo-homme {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 4px solid var(--secondary-color);
+  box-shadow: 0 8px 25px var(--card-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.photo-homme:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 35px rgba(63, 81, 181, 0.4);
+}
+
+.photo-decoration {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 170px;
+  height: 170px;
+  border: 3px solid var(--accent-color);
+  border-radius: 12px;
+  animation: rotate-decoration 15s linear infinite;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+@keyframes rotate-decoration {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+/* Icônes professionnelles autour de la photo */
+.photo-container::before,
+.photo-container::after {
+  position: absolute;
+  font-size: 20px;
+  animation: professional-float 3s ease-in-out infinite alternate;
+  color: var(--accent-color);
+  z-index: 3;
+}
+
+.photo-container::before {
+  content: "🥂";
+  top: 15px;
+  left: 25px;
+  animation-delay: 0s;
+}
+
+.photo-container::after {
+  content: "🎯";
+  top: 15px;
+  right: 25px;
+  animation-delay: 1.5s;
+}
+
+@keyframes professional-float {
+  0% {
+    opacity: 0.6;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-8px);
+  }
+}
+
+/* ================================
+   🎈 BALLONS SOPHISTIQUÉS
+   ================================ */
+
+.balloons {
+  position: fixed;
+  bottom: -120px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.balloon {
+  width: 45px;
+  height: 70px;
+  background: var(--secondary-color);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: absolute;
+  bottom: -100px;
+  animation: professionalFloat 14s linear infinite;
+  opacity: 0.8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.balloon:nth-child(1) {
+  background: #1a237e;
+  left: 15%;
+  animation-duration: 12s;
+  animation-delay: 0s;
+}
+.balloon:nth-child(2) {
+  background: #3f51b5;
+  left: 35%;
+  animation-duration: 14s;
+  animation-delay: 2s;
+}
+.balloon:nth-child(3) {
+  background: #ff9800;
+  left: 55%;
+  animation-duration: 16s;
+  animation-delay: 4s;
+}
+.balloon:nth-child(4) {
+  background: #37474f;
+  left: 75%;
+  animation-duration: 13s;
+  animation-delay: 1s;
+}
+.balloon:nth-child(5) {
+  background: #546e7a;
+  left: 25%;
+  animation-duration: 15s;
+  animation-delay: 3s;
+}
+.balloon:nth-child(6) {
+  background: #ffc107;
+  left: 65%;
+  animation-duration: 11s;
+  animation-delay: 5s;
+}
+.balloon:nth-child(7) {
+  background: #455a64;
+  left: 45%;
+  animation-duration: 13s;
+  animation-delay: 2.5s;
+}
+.balloon:nth-child(8) {
+  background: #283593;
+  left: 85%;
+  animation-duration: 14s;
+  animation-delay: 4.5s;
+}
+
+@keyframes professionalFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(-25vh) rotate(2deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-50vh) rotate(-2deg);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translateY(-75vh) rotate(1deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+/* ================================
+   🎊 CANVAS CONFETTI
+   ================================ */
+
+#confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+}
+
+/* ================================
+   📝 SECTION RSVP
+   ================================ */
+
+.rsvp {
+  background: white;
+  padding: 35px;
+  border-radius: 16px;
+  max-width: 500px;
+  box-shadow: 0 10px 35px var(--card-shadow);
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 10;
+  border: 3px solid var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.rsvp::before {
+  content: "🍻🎪🎲🎸🏆";
+  position: absolute;
+  bottom: -15px;
+  left: -15px;
+  font-size: 50px;
+  opacity: 0.06;
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+
+.rsvp h2 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
+}
+
+.rsvp label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 2;
+  font-size: 14px;
+}
+
+.rsvp input[type="text"],
+.rsvp input[type="email"],
+.rsvp input[type="number"],
+.rsvp textarea {
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 2px solid var(--secondary-color);
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: white;
+  font-family: inherit;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+}
+
+.rsvp textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.rsvp input:focus,
+.rsvp textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Styles pour les boutons radio */
+.presence-choice,
+.gift-choice {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 25px;
+  border-radius: 8px;
+  border: 2px solid var(--secondary-color);
+  background: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.radio-group:hover {
+  background: rgba(26, 35, 126, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(26, 35, 126, 0.2);
+}
+
+.radio-group input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.radio-group label {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text-color);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Section cadeau */
+.gift-section {
+  background: rgba(26, 35, 126, 0.04);
+  padding: 25px;
+  border-radius: 12px;
+  margin-top: 25px;
+  border: 2px solid var(--secondary-color);
+  position: relative;
+  z-index: 2;
+}
+
+.gift-section > label {
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+/* Bouton de soumission */
+.rsvp button {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 18px 0;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 20px rgba(26, 35, 126, 0.4);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.rsvp button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.rsvp button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(26, 35, 126, 0.5);
+}
+
+.rsvp button:hover::before {
+  left: 100%;
+}
+
+.rsvp button:active {
+  transform: translateY(-1px);
+}
+
+/* Message de confirmation */
+#confirmationMsg {
+  margin-top: 25px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 18px;
+  border-radius: 8px;
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ================================
+   👇 FOOTER
+   ================================ */
+
+.footer {
+  margin-top: 50px;
+  padding: 30px;
+  text-align: center;
+  font-size: 1rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px var(--card-shadow);
+  max-width: 500px;
+  width: 100%;
+  border: 2px solid var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: "🎩🥂🎯";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 35px;
+  opacity: 0.08;
+  transform: rotate(20deg);
+  pointer-events: none;
+}
+
+.footer h3 {
+  color: var(--primary-color);
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+}
+
+.footer p {
+  margin: 6px 0;
+  color: var(--text-color);
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+}
+
+/* ================================
+   📱 RESPONSIVE DESIGN
+   ================================ */
+
+@media (max-width: 768px) {
+  .config-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .presence-choice,
+  .gift-choice {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+
+  .invitation,
+  .rsvp,
+  .config-panel,
+  .footer {
+    max-width: 100%;
+    padding: 25px;
+  }
+
+  .invitation h1 {
+    font-size: 2rem;
+  }
+
+  .rsvp h2 {
+    font-size: 1.6rem;
+  }
+
+  .presence-choice,
+  .gift-choice {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .radio-group {
+    justify-content: center;
+    padding: 12px 20px;
+  }
+
+  .photo-homme {
+    width: 120px;
+    height: 120px;
+  }
+
+  .photo-decoration {
+    width: 150px;
+    height: 150px;
+  }
+
+  .photo-container::before,
+  .photo-container::after {
+    font-size: 16px;
+  }
+
+  .config-panel h3 {
+    font-size: 1.2rem;
+  }
+
+  .config-group label {
+    font-size: 12px;
+  }
+
+  .config-group input {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .balloon {
+    width: 35px;
+    height: 55px;
+  }
+
+  .event-details p {
+    font-size: 1rem;
+  }
+}
+
+/* ================================
+   ✨ ANIMATIONS PROFESSIONNELLES
+   ================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.invitation,
+.rsvp,
+.config-panel {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.rsvp {
+  animation-delay: 0.2s;
+}
+
+.footer {
+  animation: fadeInUp 0.8s ease-out;
+  animation-delay: 0.4s;
+}
+
+/* Effet de brillance professionnelle */
+@keyframes professional-shine {
+  0%,
+  100% {
+    box-shadow: 0 10px 35px var(--card-shadow);
+  }
+  50% {
+    box-shadow: 0 15px 45px rgba(26, 35, 126, 0.4);
+  }
+}
+
+.invitation:hover {
+  animation: professional-shine 2s ease-in-out infinite;
+}
+
+/* ================================
+   🌟 EFFETS VISUELS SOPHISTIQUÉS
+   ================================ */
+
+/* Fond avec motif professionnel subtil */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 35px,
+    rgba(26, 35, 126, 0.02) 35px,
+    rgba(26, 35, 126, 0.02) 70px
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Effet de survol sophistiqué pour les cartes */
+.invitation:hover,
+.rsvp:hover,
+.config-panel:hover {
+  transform: translateY(-5px) scale(1.01);
+}
+
+/* États de focus professionnels */
+input:focus,
+textarea:focus,
+select:focus {
+  background: linear-gradient(45deg, white, rgba(26, 35, 126, 0.02));
+}
+
+/* ================================
+   🎯 CLASSES UTILITAIRES HOMME
+   ================================ */
+
+.professional-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sophisticated {
+  border-left: 4px solid var(--accent-color);
+  padding-left: 15px;
+}
+
+.elegant-shadow {
+  box-shadow: 0 8px 25px rgba(26, 35, 126, 0.2);
+}
+
+/* Transitions fluides pour tout */
+* {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎛️ Birthday Invitation Dashboard</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      /* Header */
+      .header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 15px;
+        padding: 20px 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .header h1 {
+        color: #333;
+        font-size: 1.8rem;
+        font-weight: 700;
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .user-info {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .logout-btn {
+        background: #ff4757;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .logout-btn:hover {
+        background: #ff3838;
+        transform: translateY(-2px);
+      }
+
+      /* Container principal */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 350px 1fr;
+        gap: 30px;
+      }
+
+      /* Sidebar - Sélection de thème */
+      .theme-selector {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 30px;
+        height: fit-content;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .theme-selector h2 {
+        color: #333;
+        margin-bottom: 25px;
+        font-size: 1.4rem;
+        text-align: center;
+      }
+
+      .theme-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .theme-card {
+        border: 3px solid transparent;
+        border-radius: 15px;
+        padding: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .theme-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.1;
+        transition: opacity 0.3s ease;
+      }
+
+      .theme-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .theme-card.active {
+        border-color: #4834d4;
+        box-shadow: 0 10px 25px rgba(72, 52, 212, 0.3);
+      }
+
+      /* Thème Enfant */
+      .theme-card.child {
+        background: linear-gradient(135deg, #ff6b9d, #ff8a95);
+        color: white;
+      }
+
+      .theme-card.child::before {
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="30">🎈🌟🎀</text></svg>');
+      }
+
+      /* Thème Homme Adulte */
+      .theme-card.adult-male {
+        background: linear-gradient(135deg, #1a237e, #3f51b5);
+        color: white;
+      }
+
+      .theme-card.adult-male::before {
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="30">🎩🥂🎯</text></svg>');
+      }
+
+      /* Thème Femme Adulte */
+      .theme-card.adult-female {
+        background: linear-gradient(135deg, #8e24aa, #ba68c8);
+        color: white;
+      }
+
+      .theme-card.adult-female::before {
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="30">✨💎🌸</text></svg>');
+      }
+
+      .theme-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .theme-card p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        line-height: 1.4;
+        position: relative;
+        z-index: 2;
+      }
+
+      .theme-card .icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      /* Configuration Panel */
+      .config-panel {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .config-panel h2 {
+        color: #333;
+        margin-bottom: 25px;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .form-section {
+        margin-bottom: 30px;
+        padding: 25px;
+        background: rgba(248, 249, 250, 0.8);
+        border-radius: 15px;
+        border-left: 4px solid #4834d4;
+      }
+
+      .form-section h3 {
+        color: #4834d4;
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e1e8ed;
+        border-radius: 10px;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        background: white;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #4834d4;
+        box-shadow: 0 0 0 3px rgba(72, 52, 212, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      /* Preview Section */
+      .preview-section {
+        background: linear-gradient(135deg, #f8f9ff, #e8eeff);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 30px 0;
+        border: 2px dashed #4834d4;
+      }
+
+      .preview-section h3 {
+        color: #4834d4;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+
+      .preview-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        max-width: 400px;
+        margin: 0 auto 20px;
+      }
+
+      .preview-card h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #4834d4;
+      }
+
+      .preview-card .preview-name {
+        font-weight: 700;
+        color: #f093fb;
+      }
+
+      .preview-card .preview-age {
+        font-weight: 700;
+        color: #f5576c;
+      }
+
+      /* Action Buttons */
+      .action-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 30px;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #4834d4, #6c5ce7);
+        color: white;
+        box-shadow: 0 10px 30px rgba(72, 52, 212, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(72, 52, 212, 0.4);
+      }
+
+      .btn-secondary {
+        background: #f8f9fa;
+        color: #666;
+        border: 2px solid #e1e8ed;
+      }
+
+      .btn-secondary:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+      }
+
+      /* Generated Link */
+      .generated-link {
+        background: #f0fff4;
+        border: 2px solid #9ae6b4;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 20px;
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      .generated-link h4 {
+        color: #276749;
+        margin-bottom: 10px;
+      }
+
+      .link-display {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #9ae6b4;
+        font-family: "Courier New", monospace;
+        word-break: break-all;
+        margin-bottom: 15px;
+        position: relative;
+      }
+
+      .copy-btn {
+        background: #38a169;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .copy-btn:hover {
+        background: #2f855a;
+      }
+
+      /* Messages */
+      .message {
+        padding: 15px 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        font-weight: 500;
+        animation: slideIn 0.3s ease-out;
+      }
+
+      .message.success {
+        background: #f0fff4;
+        color: #276749;
+        border: 2px solid #9ae6b4;
+      }
+
+      .message.error {
+        background: #fee;
+        color: #c53030;
+        border: 2px solid #fed7d7;
+      }
+
+      .message.info {
+        background: #ebf8ff;
+        color: #3182ce;
+        border: 2px solid #90cdf4;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .header {
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+
+        .theme-cards {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .hidden {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <h1>🎛️ Birthday Invitation Dashboard</h1>
+      <div class="header-actions">
+        <div class="user-info">
+          Welcome, <span id="userEmail">organizer@example.com</span>
+        </div>
+        <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Sidebar - Sélection de thème -->
+      <div class="theme-selector">
+        <h2>🎨 Choose Your Theme</h2>
+        <div class="theme-cards">
+          <div class="theme-card child" data-theme="child">
+            <span class="icon">🎀</span>
+            <h3>Child Birthday</h3>
+            <p>
+              Perfect for kids aged 1-15 years. Colorful, fun, and magical
+              design with playful animations.
+            </p>
+          </div>
+
+          <div class="theme-card adult-male" data-theme="adult-male">
+            <span class="icon">🎩</span>
+            <h3>Adult Male</h3>
+            <p>
+              Sophisticated and professional design for men's birthdays. Clean,
+              elegant, and mature style.
+            </p>
+          </div>
+
+          <div class="theme-card adult-female" data-theme="adult-female">
+            <span class="icon">👗</span>
+            <h3>Adult Female</h3>
+            <p>
+              Elegant and graceful design for women's birthdays. Beautiful,
+              stylish, and sophisticated.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Configuration Panel -->
+      <div class="config-panel">
+        <h2>
+          <span id="selectedThemeIcon">🎨</span> Configure Your Invitation
+        </h2>
+
+        <form id="invitationForm">
+          <!-- Basic Information -->
+          <div class="form-section">
+            <h3>👤 Basic Information</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="guestName">Guest Name*</label>
+                <input
+                  type="text"
+                  id="guestName"
+                  name="guestName"
+                  required
+                  placeholder="Enter guest name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="guestAge">Age*</label>
+                <input
+                  type="number"
+                  id="guestAge"
+                  name="guestAge"
+                  required
+                  min="1"
+                  max="100"
+                  placeholder="Enter age"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Details -->
+          <div class="form-section">
+            <h3>📅 Event Details</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="eventDate">Date*</label>
+                <input type="date" id="eventDate" name="eventDate" required />
+              </div>
+              <div class="form-group">
+                <label for="eventTime">Time*</label>
+                <input
+                  type="text"
+                  id="eventTime"
+                  name="eventTime"
+                  required
+                  placeholder="e.g. 6:00 PM - 10:00 PM"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="eventAddress">Address*</label>
+              <input
+                type="text"
+                id="eventAddress"
+                name="eventAddress"
+                required
+                placeholder="Full address"
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactPhone">Contact Phone</label>
+                <input
+                  type="tel"
+                  id="contactPhone"
+                  name="contactPhone"
+                  placeholder="Phone number"
+                />
+              </div>
+              <div class="form-group">
+                <label for="themeOption">Theme Style</label>
+                <select id="themeOption" name="themeOption">
+                  <option value="default">Default</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Optional Information -->
+          <div class="form-section">
+            <h3>📝 Optional Information</h3>
+            <div class="form-group">
+              <label for="specialMessage">Special Message</label>
+              <textarea
+                id="specialMessage"
+                name="specialMessage"
+                placeholder="Add a personal message for your guests..."
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Preview Section -->
+          <div class="preview-section">
+            <h3>👀 Live Preview</h3>
+            <div class="preview-card">
+              <h1 id="previewTitle">🎉 Birthday Celebration 🎉</h1>
+              <p id="previewSubtitle">
+                Join us in celebrating
+                <span class="preview-name" id="previewName">Guest Name</span>'s
+                <span class="preview-age" id="previewAge">birthday</span>!
+              </p>
+              <div
+                style="
+                  margin-top: 20px;
+                  padding: 15px;
+                  background: #f8f9fa;
+                  border-radius: 10px;
+                "
+              >
+                <p>
+                  <strong>📅 When:</strong>
+                  <span id="previewDate">Select date</span>
+                </p>
+                <p>
+                  <strong>🕐 Time:</strong>
+                  <span id="previewTime">Enter time</span>
+                </p>
+                <p>
+                  <strong>📍 Where:</strong>
+                  <span id="previewAddress">Enter address</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="resetForm()"
+            >
+              🔄 Reset Form
+            </button>
+            <button type="submit" class="btn btn-primary">
+              🚀 Generate Invitation Link
+            </button>
+          </div>
+        </form>
+
+        <!-- Generated Link Display -->
+        <div id="generatedLinkSection" class="generated-link hidden">
+          <h4>🎉 Your Invitation is Ready!</h4>
+          <div class="link-display" id="invitationLink"></div>
+          <button class="copy-btn" onclick="copyLink()">📋 Copy Link</button>
+          <button
+            class="copy-btn"
+            onclick="previewInvitation()"
+            style="background: #3182ce; margin-left: 10px"
+          >
+            👀 Preview Invitation
+          </button>
+        </div>
+
+        <!-- Messages -->
+        <div id="messageContainer"></div>
+      </div>
+    </div>
+
+    <script>
+      // ================================
+      // 🔧 CONFIGURATION
+      // ================================
+
+      const THEMES = {
+        child: {
+          icon: "🎀",
+          title: "🎉 Birthday Party 🎉",
+          ageRange: { min: 1, max: 15 },
+          options: [
+            "Magical",
+            "Colorful",
+            "Fun",
+            "Playful",
+            "Princess",
+            "Superhero",
+          ],
+          url: "enfant/invitation.html",
+        },
+        "adult-male": {
+          icon: "🎩",
+          title: "🎊 Birthday Celebration 🎊",
+          ageRange: { min: 18, max: 100 },
+          options: [
+            "Casual",
+            "Smart Casual",
+            "Formal",
+            "Cocktail",
+            "Sports",
+            "Professional",
+          ],
+          url: "homme-adulte/invitation.html",
+        },
+        "adult-female": {
+          icon: "👗",
+          title: "✨ Birthday Celebration ✨",
+          ageRange: { min: 18, max: 100 },
+          options: [
+            "Elegant",
+            "Glamorous",
+            "Garden Party",
+            "Cocktail",
+            "Spa Day",
+            "Brunch",
+          ],
+          url: "femme-adulte/invitation.html",
+        },
+      };
+
+      let selectedTheme = "adult-female";
+      let generatedCode = "";
+
+      // ================================
+      // 🎨 GESTION DES THÈMES
+      // ================================
+
+      function selectTheme(theme) {
+        selectedTheme = theme;
+
+        // Mise à jour de l'interface
+        document.querySelectorAll(".theme-card").forEach((card) => {
+          card.classList.toggle("active", card.dataset.theme === theme);
+        });
+
+        // Mise à jour de l'icône
+        const themeIcon = document.getElementById("selectedThemeIcon");
+        themeIcon.textContent = THEMES[theme].icon;
+
+        // Mise à jour des options
+        updateThemeOptions();
+
+        // Mise à jour des limites d'âge
+        const ageInput = document.getElementById("guestAge");
+        const ageRange = THEMES[theme].ageRange;
+        ageInput.min = ageRange.min;
+        ageInput.max = ageRange.max;
+
+        // Valeur par défaut selon le thème
+        if (theme === "child") {
+          ageInput.value = ageInput.value || 5;
+        } else {
+          ageInput.value = ageInput.value || (theme === "adult-male" ? 30 : 28);
+        }
+
+        // Mise à jour du preview
+        updatePreview();
+
+        showMessage(
+          `🎨 Theme "${THEMES[theme].title
+            .replace(/🎉|🎊|✨/g, "")
+            .trim()}" selected!`,
+          "info"
+        );
+      }
+
+      function updateThemeOptions() {
+        const themeOptionSelect = document.getElementById("themeOption");
+        const options = THEMES[selectedTheme].options;
+
+        themeOptionSelect.innerHTML =
+          '<option value="default">Default</option>';
+
+        options.forEach((option) => {
+          const optionElement = document.createElement("option");
+          optionElement.value = option.toLowerCase().replace(/\s+/g, "-");
+          optionElement.textContent = option;
+          themeOptionSelect.appendChild(optionElement);
+        });
+      }
+
+      // ================================
+      // 👀 PREVIEW EN TEMPS RÉEL
+      // ================================
+
+      function updatePreview() {
+        const theme = THEMES[selectedTheme];
+        const name = document.getElementById("guestName").value || "Guest Name";
+        const age = document.getElementById("guestAge").value;
+        const date = document.getElementById("eventDate").value;
+        const time = document.getElementById("eventTime").value;
+        const address = document.getElementById("eventAddress").value;
+
+        // Titre
+        document.getElementById("previewTitle").textContent = theme.title;
+
+        // Nom et âge
+        document.getElementById("previewName").textContent = name;
+        document.getElementById("previewAge").textContent = age
+          ? `${age}th birthday`
+          : "birthday";
+
+        // Date
+        if (date) {
+          const dateObj = new Date(date);
+          const options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          };
+          document.getElementById("previewDate").textContent =
+            dateObj.toLocaleDateString("en-US", options);
+        } else {
+          document.getElementById("previewDate").textContent = "Select date";
+        }
+
+        // Heure et adresse
+        document.getElementById("previewTime").textContent =
+          time || "Enter time";
+        document.getElementById("previewAddress").textContent =
+          address || "Enter address";
+      }
+
+      // ================================
+      // 📨 GÉNÉRATION D'INVITATION
+      // ================================
+
+      function generateInvitation(formData) {
+        // Générer un code unique
+        generatedCode =
+          "BDAY" + Math.random().toString(36).substr(2, 6).toUpperCase();
+
+        // Sauvegarder les données (normalement dans une base de données)
+        const invitationData = {
+          code: generatedCode,
+          theme: selectedTheme,
+          ...formData,
+          createdAt: new Date().toISOString(),
+          createdBy: getCurrentUser().email,
+        };
+
+        // Sauvegarder localement pour la démo
+        localStorage.setItem(
+          `invitation_${generatedCode}`,
+          JSON.stringify(invitationData)
+        );
+
+        // Construire l'URL
+        const baseUrl =
+          window.location.origin +
+          window.location.pathname.replace("dashboard.html", "");
+        const invitationUrl = `${baseUrl}${THEMES[selectedTheme].url}?code=${generatedCode}`;
+
+        return invitationUrl;
+      }
+
+      function handleFormSubmit(e) {
+        e.preventDefault();
+
+        // Validation
+        if (!selectedTheme) {
+          showMessage("❌ Please select a theme first!", "error");
+          return;
+        }
+
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+
+        // Validation des champs requis
+        const requiredFields = [
+          "guestName",
+          "guestAge",
+          "eventDate",
+          "eventTime",
+          "eventAddress",
+        ];
+        const missingFields = requiredFields.filter((field) => !data[field]);
+
+        if (missingFields.length > 0) {
+          showMessage(
+            `❌ Please fill in: ${missingFields.join(", ")}`,
+            "error"
+          );
+          return;
+        }
+
+        // Validation de l'âge selon le thème
+        const age = parseInt(data.guestAge);
+        const ageRange = THEMES[selectedTheme].ageRange;
+
+        if (age < ageRange.min || age > ageRange.max) {
+          showMessage(
+            `❌ Age must be between ${ageRange.min} and ${ageRange.max} for this theme`,
+            "error"
+          );
+          return;
+        }
+
+        try {
+          // Générer l'invitation
+          const invitationUrl = generateInvitation(data);
+
+          // Afficher le lien généré
+          document.getElementById("invitationLink").textContent = invitationUrl;
+          document
+            .getElementById("generatedLinkSection")
+            .classList.remove("hidden");
+
+          showMessage(
+            "🎉 Invitation generated successfully! Share the link with your guests.",
+            "success"
+          );
+
+          // Scroll vers le lien
+          document.getElementById("generatedLinkSection").scrollIntoView({
+            behavior: "smooth",
+          });
+        } catch (error) {
+          showMessage(
+            "❌ Error generating invitation. Please try again.",
+            "error"
+          );
+          console.error("Generation error:", error);
+        }
+      }
+
+      // ================================
+      // 🛠️ UTILITAIRES
+      // ================================
+
+      function showMessage(text, type = "info") {
+        const container = document.getElementById("messageContainer");
+        const messageId = "msg_" + Date.now();
+
+        container.innerHTML = `<div class="message ${type}" id="${messageId}">${text}</div>`;
+
+        // Auto-masquer après 5 secondes
+        setTimeout(() => {
+          const msg = document.getElementById(messageId);
+          if (msg) msg.remove();
+        }, 5000);
+      }
+
+      function copyLink() {
+        const linkElement = document.getElementById("invitationLink");
+        const link = linkElement.textContent;
+
+        navigator.clipboard
+          .writeText(link)
+          .then(() => {
+            showMessage("📋 Link copied to clipboard!", "success");
+
+            // Animation visuelle
+            linkElement.style.background = "#d4edda";
+            setTimeout(() => {
+              linkElement.style.background = "white";
+            }, 1000);
+          })
+          .catch((err) => {
+            showMessage(
+              "❌ Failed to copy link. Please copy manually.",
+              "error"
+            );
+          });
+      }
+
+      function previewInvitation() {
+        const link = document.getElementById("invitationLink").textContent;
+        if (link) {
+          window.open(link, "_blank");
+        }
+      }
+
+      function resetForm() {
+        if (
+          confirm(
+            "Are you sure you want to reset the form? All data will be lost."
+          )
+        ) {
+          document.getElementById("invitationForm").reset();
+          document
+            .getElementById("generatedLinkSection")
+            .classList.add("hidden");
+          document.getElementById("messageContainer").innerHTML = "";
+          updatePreview();
+          showMessage("🔄 Form has been reset.", "info");
+        }
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          sessionStorage.clear();
+          localStorage.removeItem("currentUser");
+          window.location.href = "index.html";
+        }
+      }
+
+      function getCurrentUser() {
+        const user = sessionStorage.getItem("organizer");
+        return user ? JSON.parse(user) : { email: "unknown@example.com" };
+      }
+
+      // ================================
+      // 🚀 INITIALISATION
+      // ================================
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Vérifier l'authentification
+        const organizer = sessionStorage.getItem("organizer");
+        if (!organizer) {
+          window.location.href = "index.html";
+          return;
+        }
+
+        // Afficher l'utilisateur connecté
+        try {
+          const user = JSON.parse(organizer);
+          document.getElementById("userEmail").textContent = user.email;
+        } catch (error) {
+          console.error("Error parsing organizer data:", error);
+        }
+
+        // Event listeners pour les thèmes
+        document.querySelectorAll(".theme-card").forEach((card) => {
+          card.addEventListener("click", () => {
+            selectTheme(card.dataset.theme);
+          });
+        });
+
+        // Event listeners pour le formulaire
+        document
+          .getElementById("invitationForm")
+          .addEventListener("submit", handleFormSubmit);
+
+        // Event listeners pour la preview en temps réel
+        [
+          "guestName",
+          "guestAge",
+          "eventDate",
+          "eventTime",
+          "eventAddress",
+        ].forEach((id) => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.addEventListener("input", updatePreview);
+            element.addEventListener("change", updatePreview);
+          }
+        });
+
+        // Sélection du thème par défaut
+        selectTheme("adult-female");
+
+        // Définir la date par défaut (aujourd'hui + 7 jours)
+        const nextWeek = new Date();
+        nextWeek.setDate(nextWeek.getDate() + 7);
+        document.getElementById("eventDate").value = nextWeek
+          .toISOString()
+          .split("T")[0];
+
+        updatePreview();
+
+        console.log("🎛️ Dashboard loaded successfully!");
+      });
+
+      // ================================
+      // 🎮 EASTER EGGS
+      // ================================
+
+      let logoClickCount = 0;
+      document
+        .querySelector(".header h1")
+        .addEventListener("click", function () {
+          logoClickCount++;
+          if (logoClickCount === 3) {
+            this.style.background =
+              "linear-gradient(45deg, #ff6b9d, #c44569, #f8b500, #feca57)";
+            this.style.webkitBackgroundClip = "text";
+            this.style.webkitTextFillColor = "transparent";
+            this.style.backgroundSize = "400% 400%";
+            this.style.animation = "gradientShift 2s ease infinite";
+            showMessage("🌈 Rainbow mode activated!", "success");
+          }
+        });
+    </script>
+  </body>
+</html>

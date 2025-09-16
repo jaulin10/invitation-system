@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎊 Birthday Celebration 🥂</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ⚙️ Configuration dynamique -->
+    <div class="config-panel">
+      <h3>🎊 Configuration de l'invitation</h3>
+      <div class="config-row">
+        <div class="config-group">
+          <label for="guestName">Nom de la personne:</label>
+          <input
+            type="text"
+            id="guestName"
+            value="John Smith"
+            placeholder="Nom complet"
+          />
+        </div>
+        <div class="config-group">
+          <label for="guestAge">Âge:</label>
+          <input type="number" id="guestAge" value="30" min="18" max="100" />
+        </div>
+      </div>
+
+      <div class="config-row">
+        <div class="config-group">
+          <label for="eventDate">Date de l'événement:</label>
+          <input type="date" id="eventDate" value="2025-09-13" />
+        </div>
+        <div class="config-group">
+          <label for="eventTime">Heure:</label>
+          <input
+            type="text"
+            id="eventTime"
+            value="7:00 PM - 11:00 PM"
+            placeholder="Ex: 7:00 PM - 11:00 PM"
+          />
+        </div>
+      </div>
+
+      <div class="config-group">
+        <label for="eventAddress">Adresse:</label>
+        <input
+          type="text"
+          id="eventAddress"
+          value="80 Ridge Road, Cambridge, ON"
+          placeholder="Adresse complète"
+        />
+      </div>
+
+      <div class="config-row">
+        <div class="config-group">
+          <label for="contactPhone">Téléphone de contact:</label>
+          <input
+            type="text"
+            id="contactPhone"
+            value="437-366-5289"
+            placeholder="Numéro de téléphone"
+          />
+        </div>
+        <div class="config-group">
+          <label for="dresscode">Dress Code:</label>
+          <select id="dresscode">
+            <option value="casual">Casual</option>
+            <option value="smart-casual">Smart Casual</option>
+            <option value="formal">Formal</option>
+            <option value="cocktail">Cocktail Attire</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🎉 Invitation -->
+    <div class="invitation">
+      <h1 id="invitationTitle">🎊 Birthday Celebration 🎊</h1>
+
+      <!-- Photo de la personne -->
+      <div class="photo-container">
+        <img
+          src="photo-homme.jpg"
+          alt="Photo"
+          class="photo-homme"
+          id="mainPhoto"
+        />
+        <div class="photo-decoration"></div>
+      </div>
+
+      <h2 id="invitationSubtitle">
+        Join us in celebrating
+        <span class="name" id="displayName">John Smith</span>'s
+        <span class="age" id="displayAge">30th birthday</span>!
+      </h2>
+
+      <p class="invitation-subtitle" id="invitationDescription">
+        Come raise a glass and celebrate another year of life.<br />
+        Let's make it a night to remember! 🥂
+      </p>
+
+      <div class="event-details">
+        <p>
+          <strong>📅 When:</strong>
+          <span id="displayDate">Saturday, September 13th, 2025</span>
+        </p>
+        <p>
+          <strong>📍 Where:</strong>
+          <span id="displayAddress">80 Ridge Road, Cambridge, ON</span>
+        </p>
+        <p>
+          <strong>🕰️ Time:</strong>
+          <span id="displayTime">7:00 PM - 11:00 PM</span>
+        </p>
+        <p>
+          <strong>👔 Dress Code:</strong>
+          <span id="displayDresscode">Smart Casual</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- 🎈 Ballons décoratifs -->
+    <div class="balloons">
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+    </div>
+
+    <!-- 🎊 Confettis -->
+    <canvas id="confetti"></canvas>
+
+    <!-- 📝 Formulaire RSVP -->
+    <section class="rsvp">
+      <h2>Please Confirm Your Attendance</h2>
+      <form id="rsvpForm">
+        <!-- Choix Présent/Absent -->
+        <label>Will you be attending?</label>
+        <div class="presence-choice">
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="present"
+              name="presence"
+              value="present"
+              required
+            />
+            <label for="present">✅ Count me in!</label>
+          </div>
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="absent"
+              name="presence"
+              value="absent"
+              required
+            />
+            <label for="absent">❌ Sorry, can't make it</label>
+          </div>
+        </div>
+
+        <!-- Formulaire pour les présents -->
+        <div id="presentForm" class="hidden">
+          <label for="guestName">Your Name:</label>
+          <input
+            type="text"
+            id="guestNameRSVP"
+            name="guestName"
+            placeholder="Enter your full name"
+          />
+
+          <label for="email">Email (optional):</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="your.email@example.com"
+          />
+
+          <label for="totalAdults">Number of adults attending:</label>
+          <input
+            type="number"
+            id="totalAdults"
+            name="totalAdults"
+            min="1"
+            value="1"
+          />
+
+          <label for="dietaryRestrictions"
+            >Dietary restrictions/preferences:</label
+          >
+          <textarea
+            id="dietaryRestrictions"
+            name="dietaryRestrictions"
+            placeholder="Any allergies, dietary preferences, or special requirements..."
+            rows="3"
+          ></textarea>
+        </div>
+
+        <!-- Formulaire pour les absents -->
+        <div id="absentForm" class="hidden">
+          <label for="guestNameAbsent">Your Name:</label>
+          <input
+            type="text"
+            id="guestNameAbsent"
+            name="guestNameAbsent"
+            placeholder="Enter your full name"
+          />
+
+          <label for="emailAbsent">Email (optional):</label>
+          <input
+            type="email"
+            id="emailAbsent"
+            name="emailAbsent"
+            placeholder="your.email@example.com"
+          />
+
+          <label for="raison">Reason for absence:</label>
+          <textarea
+            id="raison"
+            name="raison"
+            placeholder="Please let us know why you can't attend..."
+            rows="3"
+          ></textarea>
+
+          <!-- Section cadeau -->
+          <div class="gift-section">
+            <label>Would you still like to send a gift?</label>
+            <div class="gift-choice">
+              <div class="radio-group">
+                <input type="radio" id="giftYes" name="gift" value="yes" />
+                <label for="giftYes">🎁 Yes, absolutely!</label>
+              </div>
+              <div class="radio-group">
+                <input type="radio" id="giftNo" name="gift" value="no" />
+                <label for="giftNo">❌ Not this time</label>
+              </div>
+            </div>
+
+            <div id="giftDetails" class="hidden">
+              <label for="giftType">Type or nature of the gift:</label>
+              <input
+                type="text"
+                id="giftType"
+                name="giftType"
+                placeholder="Ex: Wine, book, experience gift, e-transfer..."
+              />
+            </div>
+          </div>
+        </div>
+
+        <button type="submit">Send Confirmation 🍻</button>
+      </form>
+      <p id="confirmationMsg" class="hidden">Thank you for your response! 🎉</p>
+    </section>
+
+    <!-- 👇 Footer -->
+    <footer class="footer">
+      <h3 id="footerTitle">John Smith's 30th Birthday</h3>
+      <p>© 2025. All Rights Reserved.</p>
+      <p>📍 <span id="footerAddress">80 Ridge Road, Cambridge, ON</span></p>
+      <p>📞 Contact: <span id="footerPhone">437-366-5289</span></p>
+      <p>👔 Dress Code: <span id="footerDresscode">Smart Casual</span></p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

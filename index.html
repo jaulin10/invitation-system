@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎉 Birthday Invitation System</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Particules d'arrière-plan */
+      .particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .particle {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: float 6s infinite ease-in-out;
+      }
+
+      .particle:nth-child(1) {
+        width: 80px;
+        height: 80px;
+        left: 10%;
+        animation-delay: 0s;
+      }
+      .particle:nth-child(2) {
+        width: 120px;
+        height: 120px;
+        left: 20%;
+        animation-delay: 2s;
+      }
+      .particle:nth-child(3) {
+        width: 60px;
+        height: 60px;
+        left: 70%;
+        animation-delay: 4s;
+      }
+      .particle:nth-child(4) {
+        width: 100px;
+        height: 100px;
+        left: 80%;
+        animation-delay: 1s;
+      }
+      .particle:nth-child(5) {
+        width: 40px;
+        height: 40px;
+        left: 90%;
+        animation-delay: 3s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+          opacity: 0.1;
+        }
+        50% {
+          transform: translateY(-100px) rotate(180deg);
+          opacity: 0.3;
+        }
+      }
+
+      /* Container principal */
+      .container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 450px;
+        width: 100%;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        position: relative;
+        z-index: 10;
+        animation: slideUp 0.8s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .logo {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+
+      h1 {
+        color: #333;
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .subtitle {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        line-height: 1.5;
+      }
+
+      /* Formulaire d'authentification */
+      .auth-form {
+        margin-top: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid #e1e8ed;
+        border-radius: 12px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .form-group input::placeholder {
+        color: #aaa;
+      }
+
+      /* Bouton principal */
+      .btn {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.6s;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn:active {
+        transform: translateY(-1px);
+      }
+
+      .btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Messages d'erreur et succès */
+      .message {
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-top: 15px;
+        font-size: 14px;
+        font-weight: 500;
+        animation: fadeIn 0.3s ease-in;
+      }
+
+      .message.error {
+        background: #fee;
+        color: #c53030;
+        border: 1px solid #fed7d7;
+      }
+
+      .message.success {
+        background: #f0fff4;
+        color: #276749;
+        border: 1px solid #9ae6b4;
+      }
+
+      .message.info {
+        background: #ebf8ff;
+        color: #3182ce;
+        border: 1px solid #90cdf4;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Loading spinner */
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Options de connexion */
+      .auth-options {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .auth-btn {
+        flex: 1;
+        padding: 12px;
+        border: 2px solid #e1e8ed;
+        background: white;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        color: #555;
+      }
+
+      .auth-btn:hover {
+        border-color: #667eea;
+        color: #667eea;
+        transform: translateY(-2px);
+      }
+
+      .auth-btn.active {
+        background: #667eea;
+        border-color: #667eea;
+        color: white;
+      }
+
+      /* Footer */
+      .footer {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #e1e8ed;
+        color: #888;
+        font-size: 12px;
+      }
+
+      /* Responsive */
+      @media (max-width: 480px) {
+        .container {
+          padding: 30px 20px;
+          margin: 0 10px;
+        }
+
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        .logo {
+          font-size: 3rem;
+        }
+
+        .auth-options {
+          flex-direction: column;
+        }
+      }
+
+      /* Utilitaires */
+      .hidden {
+        display: none !important;
+      }
+
+      .mt-20 {
+        margin-top: 20px;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <div class="container">
+      <div class="logo">🎉</div>
+      <h1>Birthday Invitation System</h1>
+      <p class="subtitle">
+        Create beautiful and personalized birthday invitations for any age and
+        style
+      </p>
+
+      <!-- Options d'authentification -->
+      <div class="auth-options">
+        <button class="auth-btn active" data-mode="organizer" id="organizerBtn">
+          🏠 Organizer
+        </button>
+        <button class="auth-btn" data-mode="guest" id="guestBtn">
+          👥 Guest Access
+        </button>
+      </div>
+
+      <!-- Formulaire Organisateur -->
+      <form class="auth-form" id="organizerForm">
+        <div class="form-group">
+          <label for="organizerEmail">📧 Email Address</label>
+          <input
+            type="email"
+            id="organizerEmail"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="organizerPassword">🔒 Password</label>
+          <input
+            type="password"
+            id="organizerPassword"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn" id="loginBtn">
+          🚀 Access Dashboard
+        </button>
+      </form>
+
+      <!-- Formulaire Invité -->
+      <form class="auth-form hidden" id="guestForm">
+        <div class="form-group">
+          <label for="invitationCode">🎫 Invitation Code</label>
+          <input
+            type="text"
+            id="invitationCode"
+            placeholder="Enter your invitation code"
+            required
+          />
+        </div>
+        <button type="submit" class="btn" id="accessBtn">
+          🎊 View Invitation
+        </button>
+      </form>
+
+      <!-- Messages -->
+      <div id="messageContainer"></div>
+
+      <!-- Informations supplémentaires -->
+      <div class="footer">
+        <p>
+          <strong>For Organizers:</strong> Create and manage your birthday
+          invitations
+        </p>
+        <p><strong>For Guests:</strong> Use your invitation code to RSVP</p>
+      </div>
+    </div>
+
+    <script>
+      // ================================
+      // 🔐 CONFIGURATION ET CONSTANTES
+      // ================================
+
+      const CONFIG = {
+        // Identifiants de test (à remplacer par une vraie base de données)
+        organizers: [
+          { email: "admin@birthday.com", password: "birthday2025" },
+          { email: "organizer@example.com", password: "party123" },
+          // Ajoutez d'autres organisateurs ici
+        ],
+
+        // Codes d'invitation valides (générés automatiquement normalement)
+        invitationCodes: {
+          BDAY001: { theme: "child", name: "Emma", age: 5 },
+          BDAY002: { theme: "adult-male", name: "John", age: 30 },
+          BDAY003: { theme: "adult-female", name: "Sarah", age: 28 },
+          // Codes d'exemple
+        },
+
+        dashboardUrl: "dashboard.html",
+        baseInvitationUrl: {
+          child: "enfant/invitation.html",
+          "adult-male": "homme-adulte/invitation.html",
+          "adult-female": "femme-adulte/invitation.html",
+        },
+      };
+
+      let currentMode = "organizer";
+
+      // ================================
+      // 🎨 GESTION DE L'INTERFACE
+      // ================================
+
+      function switchAuthMode(mode) {
+        currentMode = mode;
+
+        const organizerBtn = document.getElementById("organizerBtn");
+        const guestBtn = document.getElementById("guestBtn");
+        const organizerForm = document.getElementById("organizerForm");
+        const guestForm = document.getElementById("guestForm");
+
+        // Mise à jour des boutons
+        organizerBtn.classList.toggle("active", mode === "organizer");
+        guestBtn.classList.toggle("active", mode === "guest");
+
+        // Affichage des formulaires
+        organizerForm.classList.toggle("hidden", mode !== "organizer");
+        guestForm.classList.toggle("hidden", mode !== "guest");
+
+        // Clear messages
+        clearMessage();
+      }
+
+      function showMessage(text, type = "info") {
+        const container = document.getElementById("messageContainer");
+        container.innerHTML = `<div class="message ${type}">${text}</div>`;
+      }
+
+      function clearMessage() {
+        document.getElementById("messageContainer").innerHTML = "";
+      }
+
+      function showLoading(button, text = "Processing...") {
+        button.disabled = true;
+        button.innerHTML = `<span class="loading"></span>${text}`;
+      }
+
+      function hideLoading(button, originalText) {
+        button.disabled = false;
+        button.innerHTML = originalText;
+      }
+
+      // ================================
+      // 🔐 LOGIQUE D'AUTHENTIFICATION
+      // ================================
+
+      function authenticateOrganizer(email, password) {
+        // Simulation d'une authentification (remplacez par votre API)
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const organizer = CONFIG.organizers.find(
+              (org) => org.email === email && org.password === password
+            );
+
+            if (organizer) {
+              // Sauvegarder la session
+              sessionStorage.setItem(
+                "organizer",
+                JSON.stringify({
+                  email: organizer.email,
+                  loginTime: new Date().toISOString(),
+                })
+              );
+              resolve(organizer);
+            } else {
+              reject(new Error("Invalid email or password"));
+            }
+          }, 1000);
+        });
+      }
+
+      function validateInvitationCode(code) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const invitation = CONFIG.invitationCodes[code.toUpperCase()];
+
+            if (invitation) {
+              resolve(invitation);
+            } else {
+              reject(new Error("Invalid invitation code"));
+            }
+          }, 800);
+        });
+      }
+
+      // ================================
+      // 📝 GESTION DES FORMULAIRES
+      // ================================
+
+      function handleOrganizerLogin(e) {
+        e.preventDefault();
+
+        const email = document.getElementById("organizerEmail").value.trim();
+        const password = document.getElementById("organizerPassword").value;
+        const loginBtn = document.getElementById("loginBtn");
+
+        if (!email || !password) {
+          showMessage("❌ Please fill in all fields", "error");
+          return;
+        }
+
+        showLoading(loginBtn, "Authenticating...");
+        clearMessage();
+
+        authenticateOrganizer(email, password)
+          .then((organizer) => {
+            showMessage(
+              `✅ Welcome back! Redirecting to dashboard...`,
+              "success"
+            );
+
+            // Redirection vers le dashboard
+            setTimeout(() => {
+              window.location.href = CONFIG.dashboardUrl;
+            }, 1500);
+          })
+          .catch((error) => {
+            showMessage(`❌ ${error.message}`, "error");
+            hideLoading(loginBtn, "🚀 Access Dashboard");
+          });
+      }
+
+      function handleGuestAccess(e) {
+        e.preventDefault();
+
+        const code = document.getElementById("invitationCode").value.trim();
+        const accessBtn = document.getElementById("accessBtn");
+
+        if (!code) {
+          showMessage("❌ Please enter your invitation code", "error");
+          return;
+        }
+
+        showLoading(accessBtn, "Validating...");
+        clearMessage();
+
+        validateInvitationCode(code)
+          .then((invitation) => {
+            showMessage(
+              `🎉 Welcome! Redirecting to ${invitation.name}'s invitation...`,
+              "success"
+            );
+
+            // Construire l'URL de l'invitation
+            const invitationUrl = CONFIG.baseInvitationUrl[invitation.theme];
+            const urlParams = new URLSearchParams({
+              code: code,
+              name: invitation.name,
+              age: invitation.age,
+            });
+
+            // Redirection vers l'invitation
+            setTimeout(() => {
+              window.location.href = `${invitationUrl}?${urlParams.toString()}`;
+            }, 1500);
+          })
+          .catch((error) => {
+            showMessage(`❌ ${error.message}`, "error");
+            hideLoading(accessBtn, "🎊 View Invitation");
+          });
+      }
+
+      // ================================
+      // 🚀 INITIALISATION
+      // ================================
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Event listeners pour les boutons de mode
+        document
+          .getElementById("organizerBtn")
+          .addEventListener("click", () => {
+            switchAuthMode("organizer");
+          });
+
+        document.getElementById("guestBtn").addEventListener("click", () => {
+          switchAuthMode("guest");
+        });
+
+        // Event listeners pour les formulaires
+        document
+          .getElementById("organizerForm")
+          .addEventListener("submit", handleOrganizerLogin);
+        document
+          .getElementById("guestForm")
+          .addEventListener("submit", handleGuestAccess);
+
+        // Vérifier si déjà authentifié
+        const savedOrganizer = sessionStorage.getItem("organizer");
+        if (savedOrganizer) {
+          try {
+            const organizer = JSON.parse(savedOrganizer);
+            const loginTime = new Date(organizer.loginTime);
+            const now = new Date();
+            const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
+
+            // Session valide pendant 24 heures
+            if (hoursDiff < 24) {
+              showMessage(
+                `🎯 You're already logged in as ${organizer.email}. Redirecting...`,
+                "info"
+              );
+              setTimeout(() => {
+                window.location.href = CONFIG.dashboardUrl;
+              }, 2000);
+            } else {
+              // Session expirée
+              sessionStorage.removeItem("organizer");
+            }
+          } catch (error) {
+            sessionStorage.removeItem("organizer");
+          }
+        }
+
+        // Mode par défaut
+        switchAuthMode("organizer");
+
+        // Gestion des touches de raccourci
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Tab" && e.ctrlKey) {
+            e.preventDefault();
+            const newMode = currentMode === "organizer" ? "guest" : "organizer";
+            switchAuthMode(newMode);
+          }
+        });
+
+        console.log("🎉 Birthday Invitation System - Authentication loaded!");
+      });
+
+      // ================================
+      // 🎮 EASTER EGGS
+      // ================================
+
+      let clickCount = 0;
+      document.querySelector(".logo").addEventListener("click", function () {
+        clickCount++;
+        if (clickCount === 5) {
+          this.style.animation = "bounce 0.5s infinite";
+          showMessage("🎊 You found the party mode! Keep clicking!", "info");
+        } else if (clickCount === 10) {
+          document.body.style.background =
+            "linear-gradient(45deg, #ff6b9d, #c44569, #f8b500, #feca57, #ff9ff3, #54a0ff)";
+          document.body.style.backgroundSize = "400% 400%";
+          document.body.style.animation = "gradientShift 3s ease infinite";
+          showMessage("🌈 PARTY MODE ACTIVATED! You're awesome!", "success");
+
+          // Ajouter l'animation CSS
+          const style = document.createElement("style");
+          style.textContent = `
+                    @keyframes gradientShift {
+                        0% { background-position: 0% 50%; }
+                        50% { background-position: 100% 50%; }
+                        100% { background-position: 0% 50%; }
+                    }
+                `;
+          document.head.appendChild(style);
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,960 @@
+/* style.css - Version dédiée FEMME ADULTE */
+
+/* ================================
+   👗 VARIABLES CSS THÈME FEMME
+   ================================ */
+
+:root {
+  --primary-color: #8e24aa;
+  --secondary-color: #ba68c8;
+  --accent-color: #ffc107;
+  --background-color: #faf5ff;
+  --text-color: #4a148c;
+  --card-shadow: rgba(186, 104, 200, 0.3);
+  --border-radius: 15px;
+  --gradient-primary: linear-gradient(135deg, #8e24aa, #ba68c8);
+  --gradient-secondary: linear-gradient(135deg, #ffc107, #ffeb3b);
+  --gradient-accent: linear-gradient(135deg, #e91e63, #f48fb1);
+}
+
+/* ================================
+   🔧 RESET ET STYLES DE BASE
+   ================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+}
+
+body {
+  background: var(--background-color);
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(186, 104, 200, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(255, 193, 7, 0.08) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(142, 36, 170, 0.03) 0%, transparent 50%);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ================================
+   ⚙️ PANNEAU DE CONFIGURATION
+   ================================ */
+
+.config-panel {
+  background: white;
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 30px var(--card-shadow);
+  margin-bottom: 25px;
+  max-width: 600px;
+  width: 100%;
+  border: 3px solid var(--secondary-color);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.rsvp button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s;
+}
+
+.rsvp button:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(142, 36, 170, 0.5);
+}
+
+.rsvp button:hover::before {
+  left: 100%;
+}
+
+.rsvp button:active {
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Message de confirmation */
+#confirmationMsg {
+  margin-top: 25px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 20px;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ================================
+   👇 FOOTER
+   ================================ */
+
+.footer {
+  margin-top: 50px;
+  padding: 30px;
+  text-align: center;
+  font-size: 1rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px var(--card-shadow);
+  max-width: 500px;
+  width: 100%;
+  border: 3px solid var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '💖🌸✨';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 30px;
+  opacity: 0.1;
+  transform: rotate(20deg);
+  pointer-events: none;
+}
+
+.footer h3 {
+  color: var(--primary-color);
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(142, 36, 170, 0.2);
+  position: relative;
+  z-index: 2;
+}
+
+.footer p {
+  margin: 8px 0;
+  color: var(--text-color);
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+}
+
+/* ================================
+   📱 RESPONSIVE DESIGN
+   ================================ */
+
+@media (max-width: 768px) {
+  .config-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .presence-choice,
+  .gift-choice {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+
+  .invitation,
+  .rsvp,
+  .config-panel,
+  .footer {
+    max-width: 100%;
+    padding: 25px;
+  }
+
+  .invitation h1 {
+    font-size: 2.2rem;
+  }
+
+  .rsvp h2 {
+    font-size: 1.8rem;
+  }
+
+  .presence-choice,
+  .gift-choice {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .radio-group {
+    justify-content: center;
+    padding: 12px 20px;
+  }
+
+  .photo-femme {
+    width: 130px;
+    height: 130px;
+  }
+
+  .photo-decoration {
+    width: 170px;
+    height: 170px;
+  }
+
+  .photo-container::before,
+  .photo-container::after {
+    font-size: 18px;
+  }
+
+  .config-panel h3 {
+    font-size: 1.3rem;
+  }
+
+  .config-group label {
+    font-size: 13px;
+  }
+
+  .config-group input {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .balloon {
+    width: 40px;
+    height: 60px;
+  }
+
+  .event-details p {
+    font-size: 1rem;
+  }
+}
+
+/* ================================
+   ✨ ANIMATIONS FÉMININES
+   ================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.invitation,
+.rsvp,
+.config-panel {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.rsvp {
+  animation-delay: 0.2s;
+}
+
+.footer {
+  animation: fadeInUp 0.8s ease-out;
+  animation-delay: 0.4s;
+}
+
+/* Effet de scintillement élégant */
+@keyframes elegant-sparkle {
+  0%, 100% {
+    box-shadow: 0 12px 40px var(--card-shadow);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 15px 50px rgba(186, 104, 200, 0.4);
+    filter: brightness(1.03);
+  }
+}
+
+.invitation:hover {
+  animation: elegant-sparkle 3s ease-in-out infinite;
+}
+
+/* ================================
+   🌟 EFFETS VISUELS SOPHISTIQUÉS
+   ================================ */
+
+/* Fond avec motif féminin subtil */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(2px 2px at 25px 35px, rgba(186, 104, 200, 0.2), transparent),
+    radial-gradient(2px 2px at 55px 75px, rgba(255, 193, 7, 0.2), transparent),
+    radial-gradient(1px 1px at 105px 45px, rgba(233, 30, 99, 0.2), transparent);
+  background-repeat: repeat;
+  background-size: 150px 80px;
+  animation: feminine-sparkles 25s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+@keyframes feminine-sparkles {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to { background-position: 150px 80px, -150px 80px, 75px -80px; }
+}
+
+/* Effet de survol élégant pour les cartes */
+.invitation:hover,
+.rsvp:hover,
+.config-panel:hover {
+  transform: translateY(-8px) scale(1.02);
+  filter: brightness(1.02);
+}
+
+/* États de focus féminins */
+input:focus,
+textarea:focus,
+select:focus {
+  background: linear-gradient(45deg, white, rgba(186, 104, 200, 0.03));
+}
+
+/* ================================
+   💎 CLASSES UTILITAIRES FEMME
+   ================================ */
+
+.feminine-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.elegant-border {
+  border-left: 4px solid var(--accent-color);
+  padding-left: 15px;
+}
+
+.dreamy-shadow {
+  box-shadow: 0 10px 30px rgba(186, 104, 200, 0.25);
+}
+
+.graceful {
+  animation: feminine-float 3s ease-in-out infinite alternate;
+}
+
+/* Effet de pétales flottants */
+@keyframes petal-fall {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+.invitation::after {
+  content: '🌸';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  animation: petal-fall 8s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Transitions fluides pour tout */
+* {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ================================
+   🎨 THÈMES SPÉCIAUX
+   ================================ */
+
+/* Thème Elegant */
+.theme-elegant .invitation {
+  background: linear-gradient(135deg, #ffffff, #faf5ff);
+}
+
+.theme-elegant .balloon:nth-child(odd) {
+  background: #8e24aa;
+}
+
+.theme-elegant .balloon:nth-child(even) {
+  background: #ba68c8;
+}
+
+/* Thème Glamorous */
+.theme-glamorous .invitation {
+  background: linear-gradient(135deg, #ffffff, #fff8e1);
+  border-color: #ffc107;
+}
+
+.theme-glamorous .balloon {
+  background: linear-gradient(135deg, #ffc107, #ffeb3b) !important;
+}
+
+/* Thème Garden Party */
+.theme-garden-party .invitation {
+  background: linear-gradient(135deg, #ffffff, #f1f8e9);
+  border-color: #4caf50;
+}
+
+.theme-garden-party .balloon:nth-child(odd) {
+  background: #4caf50;
+}
+
+.theme-garden-party .balloon:nth-child(even) {
+  background: #81c784;
+}
+
+/* Thème Cocktail */
+.theme-cocktail .invitation {
+  background: linear-gradient(135deg, #ffffff, #fce4ec);
+  border-color: #e91e63;
+}
+
+.theme-cocktail .balloon:nth-child(odd) {
+  background: #e91e63;
+}
+
+.theme-cocktail .balloon:nth-child(even) {
+  background: #f48fb1;
+}
+
+/* Thème Spa */
+.theme-spa .invitation {
+  background: linear-gradient(135deg, #ffffff, #e8f5e8);
+  border-color: #00bcd4;
+}
+
+.theme-spa .balloon:nth-child(odd) {
+  background: #00bcd4;
+}
+
+.theme-spa .balloon:nth-child(even) {
+  background: #4dd0e1;
+} relative;
+  overflow: hidden;
+}
+
+.config-panel::before {
+  content: '💎✨🌸💕🦋';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 45px;
+  opacity: 0.1;
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.config-panel h3 {
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(142, 36, 170, 0.2);
+}
+
+.config-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.config-group {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.config-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 14px;
+}
+
+.config-group input,
+.config-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background: white;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.config-group input:focus,
+.config-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.15);
+  transform: translateY(-1px);
+}
+
+.config-group select {
+  cursor: pointer;
+}
+
+/* ================================
+   💖 CARTE D'INVITATION
+   ================================ */
+
+.invitation {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px var(--card-shadow);
+  padding: 40px;
+  max-width: 500px;
+  text-align: center;
+  margin-bottom: 30px;
+  border: 4px solid var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.invitation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    transparent 0%, 
+    rgba(186, 104, 200, 0.03) 25%, 
+    rgba(255, 193, 7, 0.03) 50%,
+    rgba(233, 30, 99, 0.03) 75%,
+    transparent 100%
+  );
+  animation: dreamy-shimmer 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes dreamy-shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.invitation h1 {
+  font-size: 2.6rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 25px;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  animation: gentle-glow 3s ease-in-out infinite;
+}
+
+@keyframes gentle-glow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(186, 104, 200, 0.3)); }
+  50% { filter: drop-shadow(0 0 15px rgba(186, 104, 200, 0.5)); }
+}
+
+.invitation h2 {
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: var(--text-color);
+  line-height: 1.5;
+  position: relative;
+  z-index: 2;
+}
+
+.invitation .age,
+.invitation .name {
+  font-weight: 700;
+  color: var(--secondary-color);
+  text-shadow: 1px 1px 3px rgba(186, 104, 200, 0.3);
+}
+
+.invitation-subtitle {
+  font-style: italic;
+  margin: 25px 0;
+  line-height: 1.6;
+  color: var(--text-color);
+  position: relative;
+  z-index: 2;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.event-details {
+  margin-top: 30px;
+  position: relative;
+  z-index: 2;
+  background: rgba(186, 104, 200, 0.08);
+  padding: 25px;
+  border-radius: 15px;
+  border: 2px solid var(--accent-color);
+}
+
+.event-details p {
+  margin: 12px 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.event-details strong {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* ================================
+   📸 PHOTO ET DÉCORATION
+   ================================ */
+
+.photo-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.photo-femme {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 5px solid var(--secondary-color);
+  box-shadow: 0 10px 30px var(--card-shadow);
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.photo-femme:hover {
+  transform: scale(1.08);
+  box-shadow: 0 15px 40px rgba(186, 104, 200, 0.4);
+  filter: brightness(1.05);
+}
+
+.photo-decoration {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 190px;
+  height: 190px;
+  border: 4px dashed var(--accent-color);
+  border-radius: 50%;
+  animation: elegant-rotation 20s linear infinite;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+@keyframes elegant-rotation {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  100% { transform: translateX(-50%) rotate(360deg); }
+}
+
+/* Éléments décoratifs féminins autour de la photo */
+.photo-container::before,
+.photo-container::after {
+  position: absolute;
+  font-size: 22px;
+  animation: feminine-float 4s ease-in-out infinite alternate;
+  color: var(--accent-color);
+  z-index: 3;
+}
+
+.photo-container::before {
+  content: "💎";
+  top: 20px;
+  left: 30px;
+  animation-delay: 0s;
+}
+
+.photo-container::after {
+  content: "🌸";
+  top: 20px;
+  right: 30px;
+  animation-delay: 2s;
+}
+
+@keyframes feminine-float {
+  0% {
+    opacity: 0.7;
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-10px) rotate(15deg);
+  }
+}
+
+/* Ajout d'étoiles supplémentaires */
+.photo-container {
+  position: relative;
+}
+
+.photo-container::after {
+  content: "✨";
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 18px;
+  animation: feminine-float 3s ease-in-out infinite alternate;
+  animation-delay: 1s;
+}
+
+/* ================================
+   🎈 BALLONS ÉLÉGANTS
+   ================================ */
+
+.balloons {
+  position: fixed;
+  bottom: -120px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.balloon {
+  width: 50px;
+  height: 75px;
+  background: var(--secondary-color);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: absolute;
+  bottom: -100px;
+  animation: gracefulFloat 16s linear infinite;
+  opacity: 0.85;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.balloon:nth-child(1) { background: #8e24aa; left: 12%; animation-duration: 14s; animation-delay: 0s; }
+.balloon:nth-child(2) { background: #ba68c8; left: 28%; animation-duration: 16s; animation-delay: 2s; }
+.balloon:nth-child(3) { background: #ffc107; left: 44%; animation-duration: 18s; animation-delay: 4s; }
+.balloon:nth-child(4) { background: #e91e63; left: 60%; animation-duration: 15s; animation-delay: 1s; }
+.balloon:nth-child(5) { background: #f48fb1; left: 76%; animation-duration: 17s; animation-delay: 3s; }
+.balloon:nth-child(6) { background: #9c27b0; left: 20%; animation-duration: 13s; animation-delay: 5s; }
+.balloon:nth-child(7) { background: #ce93d8; left: 52%; animation-duration: 15s; animation-delay: 2.5s; }
+.balloon:nth-child(8) { background: #ffeb3b; left: 68%; animation-duration: 16s; animation-delay: 4.5s; }
+.balloon:nth-child(9) { background: #ab47bc; left: 84%; animation-duration: 14s; animation-delay: 1.5s; }
+
+@keyframes gracefulFloat {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0.85;
+  }
+  25% {
+    transform: translateY(-30vh) rotate(3deg) scale(1.02);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-60vh) rotate(-3deg) scale(1.05);
+    opacity: 0.75;
+  }
+  75% {
+    transform: translateY(-90vh) rotate(2deg) scale(1.08);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-130vh) rotate(0deg) scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* ================================
+   🎊 CANVAS CONFETTI
+   ================================ */
+
+#confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+}
+
+/* ================================
+   📝 SECTION RSVP
+   ================================ */
+
+.rsvp {
+  background: white;
+  padding: 35px;
+  border-radius: 20px;
+  max-width: 500px;
+  box-shadow: 0 12px 40px var(--card-shadow);
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 10;
+  border: 4px solid var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.rsvp::before {
+  content: '💕🌺🎁💎✨';
+  position: absolute;
+  bottom: -10px;
+  left: -10px;
+  font-size: 45px;
+  opacity: 0.08;
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+
+.rsvp h2 {
+  color: var(--primary-color);
+  font-size: 2.1rem;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(142, 36, 170, 0.2);
+  position: relative;
+  z-index: 2;
+}
+
+.rsvp label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--primary-color);
+  position: relative;
+  z-index: 2;
+  font-size: 14px;
+}
+
+.rsvp input[type="text"],
+.rsvp input[type="email"],
+.rsvp input[type="number"],
+.rsvp textarea {
+  width: 100%;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 2px solid var(--secondary-color);
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: white;
+  font-family: inherit;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+}
+
+.rsvp textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.rsvp input:focus,
+.rsvp textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Styles pour les boutons radio */
+.presence-choice, .gift-choice {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 25px;
+  border-radius: 12px;
+  border: 2px solid var(--secondary-color);
+  background: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.radio-group:hover {
+  background: rgba(186, 104, 200, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(186, 104, 200, 0.25);
+}
+
+.radio-group input[type="radio"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.radio-group label {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+/* Section cadeau */
+.gift-section {
+  background: rgba(186, 104, 200, 0.06);
+  padding: 25px;
+  border-radius: 15px;
+  margin-top: 25px;
+  border: 2px solid var(--secondary-color);
+  position: relative;
+  z-index: 2;
+}
+
+.gift-section > label {
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+/* Bouton de soumission */
+.rsvp button {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 20px 0;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  width: 100%;
+  font-weight: 700;
+  box-shadow: 0 8px 25px rgba(142, 36, 170, 0.4);
+  position:
