@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <!-- Librairie QR Code si nécessaire -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 💌 Invitation -->
+    <div class="invitation">
+      <h1>🎉 {{party_emoji}} 🎉</h1>
+
+      <!-- Photo de l'enfant -->
+      <div class="photo-container">
+        <img
+          src="{{guest_photo_url}}"
+          alt="{{title}}'s photo"
+          class="photo-enfant"
+          onerror='this.src="/images/default-avatar.jpg"'
+        />
+        <div class="photo-decoration"></div>
+      </div>
+
+      <h2>
+        Notre petite princesse <span class="name">{{child_name}}</span> souffle
+        sa <span class="age">{{child_age}}</span> !
+      </h2>
+
+      <p class="invitation-subtitle">{{custom_message}}</p>
+
+      <div class="event-details">
+        <p><strong>📅 Date :</strong> {{event_date}}</p>
+        <p><strong>📍 Lieu :</strong> {{event_location}}</p>
+        <p><strong>🕐 Heure :</strong> {{event_time}}</p>
+      </div>
+    </div>
+
+    <!-- 🎈 Ballons décoratifs -->
+    <div class="balloons">
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+    </div>
+
+    <!-- 🎊 Confettis -->
+    <canvas id="confetti"></canvas>
+
+    <!-- 🎟️ Formulaire RSVP -->
+    <section class="rsvp">
+      <h2>Veuillez confirmer votre présence</h2>
+      <form id="rsvpForm">
+        <!-- Choix Présent/Absent -->
+        <label>Serez-vous présent(e) ?</label>
+        <div class="presence-choice">
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="present"
+              name="presence"
+              value="present"
+              required
+            />
+            <label for="present">✅ Oui, je serai là !</label>
+          </div>
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="absent"
+              name="presence"
+              value="absent"
+              required
+            />
+            <label for="absent">❌ Désolé, je ne peux pas</label>
+          </div>
+        </div>
+
+        <!-- Formulaire pour les présents -->
+        <div id="presentForm" class="hidden">
+          <label for="pere">Nom du père :</label>
+          <input
+            type="text"
+            id="pere"
+            name="pere"
+            placeholder="Entrez le nom du père"
+          />
+
+          <label for="mere">Nom de la mère :</label>
+          <input
+            type="text"
+            id="mere"
+            name="mere"
+            placeholder="Entrez le nom de la mère"
+          />
+
+          <label for="age0_2">Enfants de 0-2 ans :</label>
+          <input type="number" id="age0_2" name="age0_2" min="0" value="0" />
+
+          <label for="age2_5">Enfants de 2-5 ans :</label>
+          <input type="number" id="age2_5" name="age2_5" min="0" value="0" />
+
+          <label for="age5_10">Enfants de 5-10 ans :</label>
+          <input type="number" id="age5_10" name="age5_10" min="0" value="0" />
+        </div>
+
+        <!-- Formulaire pour les absents -->
+        <div id="absentForm" class="hidden">
+          <label for="pereAbsent">Nom du père :</label>
+          <input
+            type="text"
+            id="pereAbsent"
+            name="pereAbsent"
+            placeholder="Entrez le nom du père"
+          />
+
+          <label for="mereAbsent">Nom de la mère :</label>
+          <input
+            type="text"
+            id="mereAbsent"
+            name="mereAbsent"
+            placeholder="Entrez le nom de la mère"
+          />
+
+          <label for="raison">Raison de l'absence :</label>
+          <textarea
+            id="raison"
+            name="raison"
+            placeholder="Dites-nous pourquoi vous ne pouvez pas venir..."
+          ></textarea>
+
+          <!-- Section cadeau -->
+          <div class="gift-section">
+            <label>Souhaitez-vous tout de même offrir un cadeau ?</label>
+            <div class="gift-choice">
+              <div class="radio-group">
+                <input type="radio" id="giftYes" name="gift" value="yes" />
+                <label for="giftYes">🎁 Oui, avec plaisir !</label>
+              </div>
+              <div class="radio-group">
+                <input type="radio" id="giftNo" name="gift" value="no" />
+                <label for="giftNo">❌ Pas cette fois</label>
+              </div>
+            </div>
+
+            <div id="giftDetails" class="hidden">
+              <label for="giftType">Type ou nature du cadeau :</label>
+              <input
+                type="text"
+                id="giftType"
+                name="giftType"
+                placeholder="Ex : Jouet, vêtements, livres..."
+              />
+            </div>
+          </div>
+        </div>
+
+        <button type="submit">Envoyer la confirmation ✅</button>
+      </form>
+      <p id="confirmationMsg" class="hidden">Merci pour votre réponse ! 🎉</p>
+    </section>
+
+    <footer class="footer">
+      <h3>{{title}}</h3>
+      <p>© {{year}} Tous droits réservés</p>
+      <p>📍 {{event_location}}</p>
+      <p>📞 Contact : {{contact_phone}}</p>
+    </footer>
+
+    <script src="/public/js/invitation-editor.js"></script>
+  </body>
+</html>

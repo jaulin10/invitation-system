@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎩 Birthday Celebration 🎩</title>
+    <link rel="stylesheet" href="adult-male-styles.css" />
+  </head>
+  <body>
+    <header class="header">🎩 Birthday Invitation System</header>
+
+    <!-- Balloons & confetti -->
+    <div class="balloons"></div>
+    <canvas id="confetti"></canvas>
+
+    <!-- Invitation content -->
+    <main class="invitation">
+      <h1 id="invitationTitle">🎊 Birthday Celebration 🎊</h1>
+
+      <div class="photo-container">
+        <img id="guestPhoto" src="" alt="Birthday Guest" class="guest-photo" />
+        <div class="photo-decoration"></div>
+      </div>
+
+      <h2 id="invitationSubtitle">
+        Join us in celebrating
+        <span class="guest-name" id="guestName"></span>'s
+        <span class="guest-age" id="guestAge"></span>!
+      </h2>
+
+      <p id="invitationDescription"></p>
+
+      <section class="event-details">
+        <h3>📋 Event Details</h3>
+        <p><strong>📅 When:</strong> <span id="eventDate"></span></p>
+        <p><strong>🕕 Time:</strong> <span id="eventTime"></span></p>
+        <p><strong>📍 Where:</strong> <span id="eventAddress"></span></p>
+        <p><strong>📞 Contact:</strong> <span id="contactPhone"></span></p>
+        <p><strong>🎨 Theme:</strong> <span id="eventTheme"></span></p>
+      </section>
+    </main>
+
+    <!-- RSVP Form -->
+    <section class="rsvp">
+      <h2>Confirm Your Attendance</h2>
+      <form id="rsvpForm">
+        <label>Will you be joining us?</label>
+        <div class="presence-choice">
+          <input
+            type="radio"
+            id="present"
+            name="presence"
+            value="present"
+            required
+          />
+          <label for="present">✅ Count me in!</label>
+          <input
+            type="radio"
+            id="absent"
+            name="presence"
+            value="absent"
+            required
+          />
+          <label for="absent">❌ Can't make it</label>
+        </div>
+
+        <div id="presentForm" class="hidden">
+          <input
+            type="text"
+            id="attendeeName"
+            placeholder="Your Name*"
+            required
+          />
+          <input
+            type="email"
+            id="attendeeEmail"
+            placeholder="Email (optional)"
+          />
+          <input type="number" id="guestCount" min="1" value="1" />
+          <textarea
+            id="dietaryRequirements"
+            placeholder="Dietary preferences/allergies"
+          ></textarea>
+          <textarea
+            id="specialMessage"
+            placeholder="Special message (optional)"
+          ></textarea>
+        </div>
+
+        <div id="absentForm" class="hidden">
+          <input
+            type="text"
+            id="attendeeNameAbsent"
+            placeholder="Your Name*"
+            required
+          />
+          <input
+            type="email"
+            id="attendeeEmailAbsent"
+            placeholder="Email (optional)"
+          />
+          <textarea
+            id="absenceReason"
+            placeholder="Reason for absence"
+            required
+          ></textarea>
+          <div class="gift-section hidden">
+            <label>Would you still like to send a gift?</label>
+            <input type="radio" id="giftYes" name="gift" value="yes" />
+            <label for="giftYes">🎁 Yes</label>
+            <input type="radio" id="giftNo" name="gift" value="no" />
+            <label for="giftNo">❌ No</label>
+            <input
+              type="text"
+              id="giftType"
+              placeholder="Type of gift"
+              class="hidden"
+            />
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn">Send Confirmation 🎯</button>
+      </form>
+      <div id="messageContainer"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <h3 id="footerTitle"></h3>
+      <p>© 2025. Celebrated with Style.</p>
+      <p>📍 <span id="footerAddress"></span></p>
+      <p>📞 Contact: <span id="footerPhone"></span></p>
+    </footer>
+
+    <script src="adult-male-script.js"></script>
+    <script src="confetti.js"></script>
+  </body>
+</html>

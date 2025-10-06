@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soan Ngounou's 1st Birthday 🎂</title>
+    <!-- Librairie pour générer le QR Code -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 💌 Invitation -->
+    <div class="invitation">
+      <h1>🎉 First Birthday Party 🎉</h1>
+
+      <!-- Photo de l'enfant -->
+      <div class="photo-container">
+        <img
+          src="photo-enfant.jpg"
+          alt="Ange Eleonora's photo"
+          class="photo-enfant"
+        />
+        <div class="photo-decoration"></div>
+      </div>
+
+      <h2>
+        Our little prince <span class="name">Soan NGOUNOU</span> is blowing out
+        his <span class="age">first candle</span>!
+      </h2>
+
+      <p class="invitation-subtitle">
+        Our little one, is blowing out his very first candle!<br />
+        Let's make his big day unforgettable with love, joy and laughter. ✨
+      </p>
+
+      <div class="event-details">
+        <p><strong>📅 When:</strong> Saturday, November 8th, 2025</p>
+        <p>
+          <strong>📍 Where:</strong> 550 Birchmount Rd, Scarborough, ON M1K 0A4
+        </p>
+        <p><strong>🕐 Time:</strong> 3:00 PM</p>
+      </div>
+    </div>
+
+    <!-- 🎈 Ballons décoratifs -->
+    <div class="balloons">
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+    </div>
+
+    <!-- 🎊 Confettis -->
+    <canvas id="confetti"></canvas>
+
+    <!-- 🎟️ Formulaire RSVP -->
+    <section class="rsvp">
+      <h2>Please Confirm Your Attendance</h2>
+      <form id="rsvpForm">
+        <!-- Choix Présent/Absent -->
+        <label>Will you be attending?</label>
+        <div class="presence-choice">
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="present"
+              name="presence"
+              value="present"
+              required
+            />
+            <label for="present">✅ Yes, I'll be there!</label>
+          </div>
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="absent"
+              name="presence"
+              value="absent"
+              required
+            />
+            <label for="absent">❌ Sorry, can't make it</label>
+          </div>
+        </div>
+
+        <!-- Formulaire pour les présents -->
+        <div id="presentForm" class="hidden">
+          <label for="pere">Father's name:</label>
+          <input
+            type="text"
+            id="pere"
+            name="pere"
+            placeholder="Enter father's name"
+          />
+
+          <label for="mere">Mother's name:</label>
+          <input
+            type="text"
+            id="mere"
+            name="mere"
+            placeholder="Enter mother's name"
+          />
+
+          <label for="age0_2">Children aged 0-2 years:</label>
+          <input type="number" id="age0_2" name="age0_2" min="0" value="0" />
+
+          <label for="age2_5">Children aged 2-5 years:</label>
+          <input type="number" id="age2_5" name="age2_5" min="0" value="0" />
+
+          <label for="age5_10">Children aged 5-10 years:</label>
+          <input type="number" id="age5_10" name="age5_10" min="0" value="0" />
+        </div>
+
+        <!-- Formulaire pour les absents -->
+        <div id="absentForm" class="hidden">
+          <label for="pereAbsent">Father's name:</label>
+          <input
+            type="text"
+            id="pereAbsent"
+            name="pereAbsent"
+            placeholder="Enter father's name"
+          />
+
+          <label for="mereAbsent">Mother's name:</label>
+          <input
+            type="text"
+            id="mereAbsent"
+            name="mereAbsent"
+            placeholder="Enter mother's name"
+          />
+
+          <label for="raison">Reason for absence:</label>
+          <textarea
+            id="raison"
+            name="raison"
+            placeholder="Please let us know why you can't attend..."
+          ></textarea>
+
+          <!-- Section cadeau -->
+          <div class="gift-section">
+            <label>Would you still like to send a gift?</label>
+            <div class="gift-choice">
+              <div class="radio-group">
+                <input type="radio" id="giftYes" name="gift" value="yes" />
+                <label for="giftYes">🎁 Yes, I'd love to!</label>
+              </div>
+              <div class="radio-group">
+                <input type="radio" id="giftNo" name="gift" value="no" />
+                <label for="giftNo">❌ Not this time</label>
+              </div>
+            </div>
+
+            <div id="giftDetails" class="hidden">
+              <label for="giftType">Type or nature of the gift:</label>
+              <input
+                type="text"
+                id="giftType"
+                name="giftType"
+                placeholder="Ex: Toy, clothing, books, e-transfer..."
+              />
+            </div>
+          </div>
+        </div>
+
+        <button type="submit">Send Confirmation ✅</button>
+      </form>
+      <p id="confirmationMsg" class="hidden">Thank you for your response! 🎉</p>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-info">
+          <h3>🎂 Soan Mael's 1st Birthday</h3>
+          <p>📍 550 Birchmount Rd, Scarborough, ON M1K 0A4</p>
+          <p>📅 Saturday, November 8th, 2025 | 🕐 3:00 PM</p>
+        </div>
+
+        <div class="footer-contact">
+          <h4>📞 Contact us</h4>
+          <p>Interested in our invitation system? feel free to reach us:</p>
+          <p>
+            <strong>Phone:</strong>
+            <a href="tel:+14373665289">+1 437-366-5289</a>
+          </p>
+          <p>
+            <strong>Email:</strong>
+            <a href="mailto:n.jaulin2016@gmail.com">n.jaulin2016@gmail.com</a>
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h4>🔗 Share this Invitation</h4>
+          <div class="social-icons">
+            <a
+              href="https://wa.me/?text=Join%20us%20for%20Soan%20Mael's%20birthday%20party!%20[LIEN_INVITATION]"
+              target="_blank"
+              >WhatsApp</a
+            >
+            |
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u=[LIEN_INVITATION]"
+              target="_blank"
+              >Facebook</a
+            >
+            |
+            <a
+              href="mailto:?subject=Soan%20Mael's%20Birthday%20Invitation&body=Join%20us%20for%20the%20birthday%20party!%20[LIEN_INVITATION]"
+              >Email</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <p class="footer-bottom">© 2025 InvitExpress. All Rights Reserved. ✨</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

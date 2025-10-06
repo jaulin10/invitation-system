@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administration - Système d'invitations</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <!-- Header Admin -->
+    <div class="header admin-header">
+      <h1>🛠️ Administration</h1>
+      <div class="header-actions">
+        <div class="admin-info">
+          <span class="admin-badge">🔑 Admin</span>
+          <span id="adminEmail">admin@example.com</span>
+        </div>
+        <button
+          class="btn-icon"
+          onclick="refreshData()"
+          title="Actualiser les données"
+        >
+          🔄
+        </button>
+        <button
+          class="btn-icon"
+          onclick="showSystemStatus()"
+          title="État du système"
+        >
+          🟢
+        </button>
+        <button class="logout-btn" onclick="logout()">🚪 Déconnexion</button>
+      </div>
+    </div>
+
+    <!-- Navigation Admin -->
+    <div class="nav-tabs admin-nav">
+      <button class="tab-btn active" onclick="showTab('dashboard')">
+        📊 Dashboard
+      </button>
+      <button class="tab-btn" onclick="showTab('users')">
+        👥 Utilisateurs
+      </button>
+      <button class="tab-btn" onclick="showTab('invitations')">
+        📋 Invitations
+      </button>
+      <button class="tab-btn" onclick="showTab('templates')">
+        🎨 Templates
+      </button>
+      <button class="tab-btn" onclick="showTab('payments')">
+        💳 Paiements
+      </button>
+      <button class="tab-btn" onclick="showTab('analytics')">
+        📈 Analytics
+      </button>
+      <button class="tab-btn" onclick="showTab('system')">⚙️ Système</button>
+    </div>
+
+    <div class="container admin-container">
+      <!-- Tab: Dashboard -->
+      <div id="dashboardTab" class="tab-content active">
+        <div class="admin-stats">
+          <div class="stat-card primary">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+              <div class="stat-number" id="totalUsers">-</div>
+              <div class="stat-label">Utilisateurs totaux</div>
+              <div class="stat-change" id="usersChange">-</div>
+            </div>
+          </div>
+          <div class="stat-card success">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-content">
+              <div class="stat-number" id="premiumUsers">-</div>
+              <div class="stat-label">Utilisateurs Premium</div>
+              <div class="stat-change" id="premiumChange">-</div>
+            </div>
+          </div>
+          <div class="stat-card info">
+            <div class="stat-icon">📋</div>
+            <div class="stat-content">
+              <div class="stat-number" id="totalInvitations">-</div>
+              <div class="stat-label">Invitations créées</div>
+              <div class="stat-change" id="invitationsChange">-</div>
+            </div>
+          </div>
+          <div class="stat-card warning">
+            <div class="stat-icon">💰</div>
+            <div class="stat-content">
+              <div class="stat-number" id="totalRevenue">-</div>
+              <div class="stat-label">Revenus totaux</div>
+              <div class="stat-change" id="revenueChange">-</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="dashboard-card">
+            <h3>📈 Activité récente</h3>
+            <div class="activity-list" id="recentActivity">
+              <!-- Activité chargée dynamiquement -->
+            </div>
+          </div>
+
+          <div class="dashboard-card">
+            <h3>📊 Revenus mensuels</h3>
+            <div class="chart-container">
+              <canvas id="revenueChart"></canvas>
+            </div>
+          </div>
+
+          <div class="dashboard-card">
+            <h3>🚀 Croissance utilisateurs</h3>
+            <div class="chart-container">
+              <canvas id="usersChart"></canvas>
+            </div>
+          </div>
+
+          <div class="dashboard-card">
+            <h3>🎯 Statistiques rapides</h3>
+            <div class="quick-stats">
+              <div class="quick-stat">
+                <span class="stat-value" id="avgViewsPerInvitation">-</span>
+                <span class="stat-desc">Vues moyennes/invitation</span>
+              </div>
+              <div class="quick-stat">
+                <span class="stat-value" id="conversionRate">-</span>
+                <span class="stat-desc">Taux de conversion Premium</span>
+              </div>
+              <div class="quick-stat">
+                <span class="stat-value" id="activeTemplates">-</span>
+                <span class="stat-desc">Templates actifs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Utilisateurs -->
+      <div id="usersTab" class="tab-content">
+        <div class="page-header">
+          <h2>👥 Gestion des utilisateurs</h2>
+          <div class="page-actions">
+            <div class="filter-group">
+              <select id="userFilter" onchange="filterUsers()">
+                <option value="all">Tous les utilisateurs</option>
+                <option value="premium">Premium uniquement</option>
+                <option value="regular">Gratuits uniquement</option>
+                <option value="new">Nouveaux (7 jours)</option>
+              </select>
+              <input
+                type="search"
+                id="userSearch"
+                placeholder="Rechercher un utilisateur..."
+                onchange="searchUsers()"
+              />
+            </div>
+            <button class="btn btn-secondary" onclick="exportUsers()">
+              📥 Exporter CSV
+            </button>
+          </div>
+        </div>
+
+        <div class="data-table-container">
+          <table class="data-table" id="usersTable">
+            <thead>
+              <tr>
+                <th>👤 Utilisateur</th>
+                <th>📧 Email</th>
+                <th>⭐ Statut</th>
+                <th>📋 Invitations</th>
+                <th>📅 Inscription</th>
+                <th>🔧 Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody">
+              <!-- Utilisateurs chargés dynamiquement -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination" id="usersPagination">
+          <!-- Pagination générée dynamiquement -->
+        </div>
+      </div>
+
+      <!-- Tab: Invitations -->
+      <div id="invitationsTab" class="tab-content">
+        <div class="page-header">
+          <h2>📋 Gestion des invitations</h2>
+          <div class="page-actions">
+            <input
+              type="search"
+              id="invitationSearch"
+              placeholder="Rechercher une invitation..."
+              onchange="searchInvitations()"
+            />
+            <button class="btn btn-secondary" onclick="exportInvitations()">
+              📥 Exporter données
+            </button>
+          </div>
+        </div>
+
+        <div class="invitations-stats">
+          <div class="stat-card">
+            <div class="stat-number" id="adminTotalInvitations">-</div>
+            <div class="stat-label">Total invitations</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="adminPublicInvitations">-</div>
+            <div class="stat-label">Publiques</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="adminTotalViews">-</div>
+            <div class="stat-label">Vues totales</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="adminNewInvitations">-</div>
+            <div class="stat-label">Ce mois</div>
+          </div>
+        </div>
+
+        <div class="data-table-container">
+          <table class="data-table" id="invitationsTable">
+            <thead>
+              <tr>
+                <th>📋 Titre</th>
+                <th>👤 Créateur</th>
+                <th>🎨 Template</th>
+                <th>👁️ Vues</th>
+                <th>🌐 Public</th>
+                <th>📅 Créée le</th>
+                <th>🔧 Actions</th>
+              </tr>
+            </thead>
+            <tbody id="invitationsTableBody">
+              <!-- Invitations chargées dynamiquement -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Templates - Version améliorée -->
+      <div id="templatesTab" class="tab-content">
+        <div class="page-header">
+          <h2>🎨 Gestion des templates</h2>
+          <div class="page-actions">
+            <button class="btn btn-success" onclick="seedTemplatesFromFiles()">
+              🌱 Initialiser depuis fichiers
+            </button>
+            <button class="btn btn-primary" onclick="addNewTemplate()">
+              ➕ Nouveau template
+            </button>
+          </div>
+        </div>
+
+        <!-- Statistiques Templates -->
+        <div class="template-stats-bar">
+          <div class="template-stat-card">
+            <div class="template-stat-number" id="adminTotalTemplates">-</div>
+            <div class="template-stat-label">Total templates</div>
+          </div>
+          <div class="template-stat-card">
+            <div class="template-stat-number" id="adminPremiumTemplates">-</div>
+            <div class="template-stat-label">Premium</div>
+          </div>
+          <div class="template-stat-card">
+            <div class="template-stat-number" id="adminTemplateCategories">
+              -
+            </div>
+            <div class="template-stat-label">Catégories</div>
+          </div>
+          <div class="template-stat-card">
+            <div class="template-stat-number" id="adminTotalTemplateUses">
+              -
+            </div>
+            <div class="template-stat-label">Utilisations totales</div>
+          </div>
+        </div>
+
+        <!-- Filtres Templates -->
+        <div class="template-filters">
+          <select id="templateCategoryFilter" onchange="filterTemplates()">
+            <option value="">Toutes catégories</option>
+            <option value="enfant">Enfant</option>
+            <option value="femme-adulte">Femme adulte</option>
+            <option value="homme-adulte">Homme adulte</option>
+          </select>
+          <input
+            type="search"
+            id="templateSearch"
+            placeholder="Rechercher un template..."
+            onkeyup="filterTemplates()"
+          />
+          <select id="templateTypeFilter" onchange="filterTemplates()">
+            <option value="">Tous types</option>
+            <option value="free">Gratuits</option>
+            <option value="premium">Premium</option>
+          </select>
+        </div>
+
+        <!-- Grid des Templates -->
+        <div class="templates-grid" id="adminTemplatesGrid">
+          <!-- Templates chargés dynamiquement -->
+        </div>
+      </div>
+
+      <!-- Tab: Paiements -->
+      <div id="paymentsTab" class="tab-content">
+        <div class="page-header">
+          <h2>💳 Gestion des paiements</h2>
+          <div class="page-actions">
+            <div class="date-range">
+              <input
+                type="date"
+                id="paymentDateFrom"
+                onchange="filterPayments()"
+              />
+              <span>à</span>
+              <input
+                type="date"
+                id="paymentDateTo"
+                onchange="filterPayments()"
+              />
+            </div>
+            <button class="btn btn-secondary" onclick="exportPayments()">
+              📥 Exporter
+            </button>
+          </div>
+        </div>
+
+        <div class="payment-stats">
+          <div class="stat-card success">
+            <div class="stat-number" id="totalPaymentRevenue">-</div>
+            <div class="stat-label">Revenus totaux</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="totalTransactions">-</div>
+            <div class="stat-label">Transactions</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="averagePayment">-</div>
+            <div class="stat-label">Panier moyen</div>
+          </div>
+          <div class="stat-card warning">
+            <div class="stat-number" id="failedPayments">-</div>
+            <div class="stat-label">Échecs</div>
+          </div>
+        </div>
+
+        <div class="data-table-container">
+          <table class="data-table" id="paymentsTable">
+            <thead>
+              <tr>
+                <th>💳 ID Transaction</th>
+                <th>👤 Utilisateur</th>
+                <th>💰 Montant</th>
+                <th>🏷️ Type</th>
+                <th>✅ Statut</th>
+                <th>📅 Date</th>
+              </tr>
+            </thead>
+            <tbody id="paymentsTableBody">
+              <!-- Paiements chargés dynamiquement -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Analytics -->
+      <div id="analyticsTab" class="tab-content">
+        <div class="page-header">
+          <h2>📈 Analytics avancées</h2>
+          <div class="page-actions">
+            <select id="analyticsTimeframe" onchange="updateAnalytics()">
+              <option value="7d">7 derniers jours</option>
+              <option value="30d">30 derniers jours</option>
+              <option value="3m">3 derniers mois</option>
+              <option value="1y">Année en cours</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="analytics-card">
+            <h3>📊 Évolution des inscriptions</h3>
+            <canvas id="registrationsChart"></canvas>
+          </div>
+          <div class="analytics-card">
+            <h3>💰 Répartition des revenus</h3>
+            <canvas id="revenueBreakdownChart"></canvas>
+          </div>
+          <div class="analytics-card">
+            <h3>🎨 Templates populaires</h3>
+            <div class="top-templates" id="topTemplates">
+              <!-- Top templates chargés dynamiquement -->
+            </div>
+          </div>
+          <div class="analytics-card">
+            <h3>👑 Top utilisateurs</h3>
+            <div class="top-users" id="topUsers">
+              <!-- Top users chargés dynamiquement -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Système -->
+      <div id="systemTab" class="tab-content">
+        <div class="page-header">
+          <h2>⚙️ Administration système</h2>
+        </div>
+
+        <div class="system-grid">
+          <div class="system-card">
+            <h3>🖥️ État du serveur</h3>
+            <div class="system-status">
+              <div class="status-item">
+                <span class="status-label">Base de données</span>
+                <span class="status-value online">🟢 En ligne</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">Service email</span>
+                <span class="status-value online">🟢 Opérationnel</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">Stripe</span>
+                <span class="status-value online">🟢 Connecté</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">Stockage</span>
+                <span class="status-value">📊 75% utilisé</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="system-card">
+            <h3>📝 Logs système</h3>
+            <div class="log-filters">
+              <select id="logLevel" onchange="filterLogs()">
+                <option value="all">Tous les niveaux</option>
+                <option value="error">Erreurs uniquement</option>
+                <option value="warning">Avertissements</option>
+                <option value="info">Informations</option>
+              </select>
+            </div>
+            <div class="logs-container" id="systemLogs">
+              <!-- Logs chargés dynamiquement -->
+            </div>
+          </div>
+
+          <div class="system-card">
+            <h3>🛠️ Actions rapides</h3>
+            <div class="quick-actions">
+              <button class="action-btn" onclick="clearCache()">
+                🗑️ Vider le cache
+              </button>
+              <button class="action-btn" onclick="backupDatabase()">
+                💾 Sauvegarder BDD
+              </button>
+              <button class="action-btn" onclick="sendTestEmail()">
+                📧 Test email
+              </button>
+              <button class="action-btn warning" onclick="maintenanceMode()">
+                🚧 Mode maintenance
+              </button>
+            </div>
+          </div>
+
+          <div class="system-card">
+            <h3>📊 Métriques système</h3>
+            <div class="system-metrics">
+              <div class="metric">
+                <span class="metric-label">CPU</span>
+                <div class="metric-bar">
+                  <div class="metric-fill" style="width: 45%"></div>
+                </div>
+                <span class="metric-value">45%</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">RAM</span>
+                <div class="metric-bar">
+                  <div class="metric-fill" style="width: 67%"></div>
+                </div>
+                <span class="metric-value">67%</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Disque</span>
+                <div class="metric-bar">
+                  <div class="metric-fill" style="width: 75%"></div>
+                </div>
+                <span class="metric-value">75%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div id="messageContainer"></div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+      <div class="loading-spinner"></div>
+      <p>Chargement des données admin...</p>
+    </div>
+
+    <!-- Modals -->
+    <div
+      id="modalOverlay"
+      class="modal-overlay hidden"
+      onclick="closeModal()"
+    ></div>
+
+    <!-- Modal User Details -->
+    <div id="userModal" class="modal hidden">
+      <div class="modal-header">
+        <h3>👤 Détails utilisateur</h3>
+        <button onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-content" id="userModalContent">
+        <!-- Contenu utilisateur chargé dynamiquement -->
+      </div>
+    </div>
+
+    <!-- Modal Invitation Details -->
+    <div id="invitationModal" class="modal hidden">
+      <div class="modal-header">
+        <h3>📋 Détails invitation</h3>
+        <button onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-content" id="invitationModalContent">
+        <!-- Contenu invitation chargé dynamiquement -->
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/admin.js"></script>
+
+    <!-- Ajoutez ces modals juste avant la fermeture du </body> dans admin.html -->
+
+    <!-- Modal Template (Création/Modification) -->
+    <div id="templateModal" class="modal hidden">
+      <div class="modal-header">
+        <h3 id="templateModalTitle">🎨 Nouveau template</h3>
+        <button onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-content" id="templateModalContent">
+        <!-- Contenu du formulaire template chargé dynamiquement -->
+      </div>
+    </div>
+
+    <!-- Modal Preview Template -->
+    <div id="previewModal" class="modal hidden">
+      <div class="modal-header">
+        <h3>👁️ Aperçu du template</h3>
+        <button onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-content large" id="previewModalContent">
+        <!-- Contenu de la prévisualisation chargé dynamiquement -->
+      </div>
+    </div>
+
+    <!-- Modal Confirmation -->
+    <div id="confirmModal" class="modal hidden">
+      <div class="modal-header">
+        <h3>⚠️ Confirmation</h3>
+        <button onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-content" id="confirmModalContent">
+        <!-- Contenu de confirmation chargé dynamiquement -->
+      </div>
+    </div>
+  </body>
+</html>

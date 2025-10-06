@@ -3,107 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🎉 Birthday Party Invitation 🎂</title>
+    <title>Ange Eleonora's 1st Birthday 🎂</title>
     <!-- Librairie pour générer le QR Code -->
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- ⚙️ Configuration dynamique -->
-    <div class="config-panel">
-      <h3>🎉 Configuration de l'invitation</h3>
-      <div class="config-row">
-        <div class="config-group">
-          <label for="guestName">Nom de l'enfant:</label>
-          <input
-            type="text"
-            id="guestName"
-            value="Ange Eleonora"
-            placeholder="Nom de l'enfant"
-          />
-        </div>
-        <div class="config-group">
-          <label for="guestAge">Âge:</label>
-          <input type="number" id="guestAge" value="1" min="1" max="15" />
-        </div>
-      </div>
-
-      <div class="config-row">
-        <div class="config-group">
-          <label for="eventDate">Date de l'événement:</label>
-          <input type="date" id="eventDate" value="2025-09-13" />
-        </div>
-        <div class="config-group">
-          <label for="eventTime">Heure:</label>
-          <input
-            type="text"
-            id="eventTime"
-            value="4:00 PM - 8:00 PM"
-            placeholder="Ex: 4:00 PM - 8:00 PM"
-          />
-        </div>
-      </div>
-
-      <div class="config-group">
-        <label for="eventAddress">Adresse:</label>
-        <input
-          type="text"
-          id="eventAddress"
-          value="80 Ridge Road, Cambridge, ON"
-          placeholder="Adresse complète"
-        />
-      </div>
-
-      <div class="config-group">
-        <label for="contactPhone">Téléphone de contact:</label>
-        <input
-          type="text"
-          id="contactPhone"
-          value="437-366-5289"
-          placeholder="Numéro de téléphone"
-        />
-      </div>
-    </div>
-
     <!-- 💌 Invitation -->
     <div class="invitation">
-      <h1 id="invitationTitle">🎉 First Birthday Party 🎉</h1>
+      <h1>🎉 First Birthday Party 🎉</h1>
 
       <!-- Photo de l'enfant -->
       <div class="photo-container">
         <img
-          src="photo-enfant.jpg"
-          alt="Photo de l'enfant"
+          src="../photos/photo-enfant.jpg"
+          alt="Ange Eleonora's photo"
           class="photo-enfant"
-          id="mainPhoto"
         />
         <div class="photo-decoration"></div>
       </div>
 
-      <h2 id="invitationSubtitle">
-        Our little princess
-        <span class="name" id="displayName">Ange Eleonora</span> is blowing out
-        her <span class="age" id="displayAge">first candle</span>!
+      <h2>
+        Our little princess <span class="name">Ange Eleonora</span> is blowing
+        out her <span class="age">first candle</span>!
       </h2>
 
-      <p class="invitation-subtitle" id="invitationDescription">
+      <p class="invitation-subtitle">
         Come celebrate this special milestone with us.<br />
         Already a year... how time flies! ✨
       </p>
 
       <div class="event-details">
-        <p>
-          <strong>📅 When:</strong>
-          <span id="displayDate">Saturday, September 13th, 2025</span>
-        </p>
-        <p>
-          <strong>📍 Where:</strong>
-          <span id="displayAddress">80 Ridge Road, Cambridge, ON</span>
-        </p>
-        <p>
-          <strong>🕐 Time:</strong>
-          <span id="displayTime">4:00 PM - 8:00 PM</span>
-        </p>
+        <p><strong>📅 When:</strong> Saturday, September 13th, 2025</p>
+        <p><strong>📍 Where:</strong> 80 Ridge Road, Cambridge, ON</p>
+        <p><strong>🕐 Time:</strong> 4:00 PM - 8:00 PM</p>
       </div>
     </div>
 
@@ -139,7 +72,7 @@
               value="present"
               required
             />
-            <label for="present">✅ Yes, we'll be there!</label>
+            <label for="present">✅ Yes, I'll be there!</label>
           </div>
           <div class="radio-group">
             <input
@@ -237,12 +170,11 @@
       <p id="confirmationMsg" class="hidden">Thank you for your response! 🎉</p>
     </section>
 
-    <!-- 👇 Footer -->
     <footer class="footer">
-      <h3 id="footerTitle">Ange Eleonora's 1st Birthday</h3>
-      <p>© 2025. All Rights Reserved.</p>
-      <p>📍 <span id="footerAddress">80 Ridge Road, Cambridge, ON</span></p>
-      <p>📞 Contact: <span id="footerPhone">437-366-5289</span></p>
+      <h3>Ange Eleonora's 1st Birthday</h3>
+      <p>© 2025 Ange Eleonora. All Rights Reserved.</p>
+      <p>📍 80 Ridge Road, Cambridge, ON</p>
+      <p>📞 Contact: 437-366-5289</p>
     </footer>
 
     <script src="script.js"></script>

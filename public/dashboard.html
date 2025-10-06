@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tableau de bord - Système d'invitations</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <h1>🎛️ Tableau de bord</h1>
+      <div class="header-actions">
+        <div class="user-info">
+          Bienvenue, <span id="userEmail">Loading...</span>
+          <span class="premium-badge hidden" id="premiumBadge">✨ Premium</span>
+        </div>
+        <button
+          class="btn-icon"
+          onclick="showNotifications()"
+          title="Notifications"
+        >
+          🔔
+          <span class="notification-count hidden" id="notificationCount"
+            >0</span
+          >
+        </button>
+        <button class="logout-btn" onclick="logout()">🚪 Déconnexion</button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="showTab('create')">
+        ✨ Créer
+      </button>
+      <button class="tab-btn" onclick="showTab('invitations')">
+        📋 Mes invitations
+      </button>
+      <button class="tab-btn" onclick="showTab('templates')">
+        🎨 Templates
+      </button>
+      <button class="tab-btn" onclick="showTab('settings')">
+        ⚙️ Paramètres
+      </button>
+    </div>
+
+    <div class="container">
+      <!-- Tab: Créer une invitation -->
+      <div id="createTab" class="tab-content active">
+        <div class="grid-layout">
+          <!-- Sidebar - Sélection de template -->
+          <div class="template-selector">
+            <h2>🎨 Choisir un template</h2>
+            <div class="template-categories">
+              <button
+                class="category-btn active"
+                onclick="filterTemplates('all')"
+              >
+                Tous
+              </button>
+              <button class="category-btn" onclick="filterTemplates('enfant')">
+                Enfant
+              </button>
+              <button
+                class="category-btn"
+                onclick="filterTemplates('femme-adulte')"
+              >
+                Femme
+              </button>
+              <button
+                class="category-btn"
+                onclick="filterTemplates('homme-adulte')"
+              >
+                Homme
+              </button>
+            </div>
+            <div class="template-grid" id="templateGrid">
+              <!-- Templates chargés dynamiquement -->
+            </div>
+          </div>
+
+          <!-- Configuration Panel -->
+          <div class="config-panel">
+            <h2>
+              <span id="selectedTemplateIcon">🎨</span>
+              Configurer votre invitation
+            </h2>
+
+            <form id="invitationForm">
+              <!-- Informations de base -->
+              <div class="form-section">
+                <h3>👤 Informations de base</h3>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="title">Titre de l'événement*</label>
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      required
+                      placeholder="Ex: Anniversaire de Marie"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Détails de l'événement -->
+              <div class="form-section">
+                <h3>📅 Détails de l'événement</h3>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="eventDate">Date*</label>
+                    <input
+                      type="date"
+                      id="eventDate"
+                      name="event_date"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="eventTime">Heure*</label>
+                    <input
+                      type="text"
+                      id="eventTime"
+                      name="event_time"
+                      required
+                      placeholder="Ex: 18h00 - 22h00"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="eventLocation">Adresse*</label>
+                  <textarea
+                    id="eventLocation"
+                    name="event_location"
+                    required
+                    placeholder="Adresse complète de l'événement"
+                  ></textarea>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="contactPhone">Téléphone de contact</label>
+                    <input
+                      type="tel"
+                      id="contactPhone"
+                      name="contact_phone"
+                      placeholder="01 23 45 67 89"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="eventTheme">Thème</label>
+                    <input
+                      type="text"
+                      id="eventTheme"
+                      name="event_theme"
+                      placeholder="Ex: Thème tropical"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Message personnalisé -->
+              <div class="form-section">
+                <h3>📝 Message personnalisé</h3>
+                <div class="form-group">
+                  <label for="customMessage">Message pour vos invités</label>
+                  <textarea
+                    id="customMessage"
+                    name="custom_message"
+                    placeholder="Ajoutez un message personnel..."
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Image d'invitation -->
+              <div class="form-section">
+                <h3>🖼️ Image d'invitation</h3>
+                <div class="form-group">
+                  <label for="guestPhoto">Photo (optionnel)</label>
+                  <input
+                    type="file"
+                    id="guestPhoto"
+                    name="invitation_image"
+                    accept="image/*"
+                    onchange="previewImage(this)"
+                  />
+                  <div class="image-preview hidden" id="imagePreview">
+                    <img id="previewImg" src="" alt="Aperçu" />
+                    <button type="button" onclick="removeImage()">✕</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Options de publication -->
+              <div class="form-section">
+                <h3>🌐 Options de publication</h3>
+                <div class="form-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="isPublic" name="is_public" />
+                    <span class="checkmark"></span>
+                    Rendre l'invitation publique
+                  </label>
+                  <p class="help-text">
+                    Les invitations publiques peuvent être vues et partagées
+                    librement
+                  </p>
+                </div>
+              </div>
+
+              <!-- Aperçu -->
+              <div class="preview-section">
+                <h3>👀 Aperçu en direct</h3>
+                <div class="preview-card" id="previewCard">
+                  <h1 id="previewTitle">Titre de l'événement</h1>
+                  <div class="preview-details">
+                    <p>
+                      <strong>📅 Date:</strong>
+                      <span id="previewDate">Non définie</span>
+                    </p>
+                    <p>
+                      <strong>🕐 Heure:</strong>
+                      <span id="previewTime">Non définie</span>
+                    </p>
+                    <p>
+                      <strong>📍 Lieu:</strong>
+                      <span id="previewLocation">Non défini</span>
+                    </p>
+                  </div>
+                  <div class="preview-message" id="previewMessage"></div>
+                </div>
+              </div>
+
+              <!-- Boutons d'action -->
+              <div class="action-buttons">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  onclick="resetForm()"
+                >
+                  🔄 Réinitialiser
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  🚀 Créer l'invitation
+                </button>
+              </div>
+            </form>
+
+            <!-- Lien généré -->
+            <div id="generatedLinkSection" class="generated-link hidden">
+              <h4>🎉 Votre invitation est prête !</h4>
+              <div class="link-display" id="invitationLink"></div>
+              <div class="link-actions">
+                <button class="copy-btn" onclick="copyLink()">📋 Copier</button>
+                <button class="copy-btn" onclick="previewInvitation()">
+                  👀 Aperçu
+                </button>
+                <button class="copy-btn" onclick="shareInvitation()">
+                  📤 Partager
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Mes invitations -->
+      <div id="invitationsTab" class="tab-content">
+        <div class="page-header">
+          <h2>📋 Mes invitations</h2>
+          <div class="page-actions">
+            <input
+              type="search"
+              id="searchInvitations"
+              placeholder="Rechercher..."
+              onchange="searchInvitations()"
+            />
+            <button class="btn btn-primary" onclick="showTab('create')">
+              ➕ Nouvelle invitation
+            </button>
+          </div>
+        </div>
+
+        <div class="invitations-stats">
+          <div class="stat-card">
+            <div class="stat-number" id="totalInvitations">-</div>
+            <div class="stat-label">Total invitations</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="publicInvitations">-</div>
+            <div class="stat-label">Publiques</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="totalViews">-</div>
+            <div class="stat-label">Vues totales</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="totalRSVP">-</div>
+            <div class="stat-label">Réponses RSVP</div>
+          </div>
+        </div>
+
+        <div class="invitations-grid" id="invitationsGrid">
+          <!-- Invitations chargées dynamiquement -->
+        </div>
+
+        <div class="pagination" id="invitationsPagination">
+          <!-- Pagination générée dynamiquement -->
+        </div>
+      </div>
+
+      <!-- Tab: Templates -->
+      <div id="templatesTab" class="tab-content">
+        <div class="page-header">
+          <h2>🎨 Galerie de templates</h2>
+          <div class="page-actions">
+            <button class="btn btn-secondary" onclick="loadPremiumTemplates()">
+              ✨ Voir les templates Premium
+            </button>
+          </div>
+        </div>
+
+        <div class="templates-categories">
+          <button
+            class="filter-btn active"
+            onclick="filterTemplatesView('all')"
+          >
+            Tous
+          </button>
+          <button class="filter-btn" onclick="filterTemplatesView('enfant')">
+            Enfant
+          </button>
+          <button
+            class="filter-btn"
+            onclick="filterTemplatesView('femme-adulte')"
+          >
+            Femme adulte
+          </button>
+          <button
+            class="filter-btn"
+            onclick="filterTemplatesView('homme-adulte')"
+          >
+            Homme adulte
+          </button>
+          <button class="filter-btn" onclick="filterTemplatesView('premium')">
+            Premium ✨
+          </button>
+        </div>
+
+        <div class="templates-gallery" id="templatesGallery">
+          <!-- Templates chargés dynamiquement -->
+        </div>
+      </div>
+
+      <!-- Tab: Paramètres -->
+      <div id="settingsTab" class="tab-content">
+        <div class="settings-sections">
+          <div class="settings-section">
+            <h3>👤 Profil utilisateur</h3>
+            <form id="profileForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">Prénom</label>
+                  <input type="text" id="firstName" name="first_name" />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Nom</label>
+                  <input type="text" id="lastName" name="last_name" />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Mettre à jour
+              </button>
+            </form>
+          </div>
+
+          <div class="settings-section">
+            <h3>🔐 Sécurité</h3>
+            <form id="passwordForm">
+              <div class="form-group">
+                <label for="currentPassword">Mot de passe actuel</label>
+                <input
+                  type="password"
+                  id="currentPassword"
+                  name="currentPassword"
+                />
+              </div>
+              <div class="form-group">
+                <label for="newPassword">Nouveau mot de passe</label>
+                <input type="password" id="newPassword" name="newPassword" />
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword"
+                  >Confirmer le nouveau mot de passe</label
+                >
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Changer le mot de passe
+              </button>
+            </form>
+          </div>
+
+          <div class="settings-section">
+            <h3>⭐ Abonnement Premium</h3>
+            <div class="premium-info" id="premiumInfo">
+              <!-- Informations Premium chargées dynamiquement -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div id="messageContainer"></div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+      <div class="loading-spinner"></div>
+      <p>Chargement...</p>
+    </div>
+
+    <!-- Modals -->
+    <div
+      id="modalOverlay"
+      class="modal-overlay hidden"
+      onclick="closeModal()"
+    ></div>
+
+    <!-- Modal Invitation Details -->
+    <div id="invitationModal" class="modal hidden">
+      <div class="modal-header">
+        <h3>Détails de l'invitation</h3>
+        <button onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-content" id="invitationModalContent">
+        <!-- Contenu chargé dynamiquement -->
+      </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>

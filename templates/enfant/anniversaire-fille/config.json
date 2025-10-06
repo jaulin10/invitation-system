@@ -1,0 +1,35 @@
+{
+  "name": "Enfant - Template Rose Princesse",
+  "description": "Template rose avec ballons et confettis pour anniversaire d'enfant fille",
+  "category": "enfant",
+  "is_premium": false,
+  "target_age": "3-10 ans",
+  "theme": "princesse",
+  "colors": {
+    "primary": "#d6336c",
+    "secondary": "#ff6b9d",
+    "background": "#fff0f6"
+  },
+  "required_variables": [
+    "title",
+    "child_name",
+    "child_age",
+    "event_date",
+    "event_time",
+    "event_location",
+    "contact_phone",
+    "custom_message",
+    "guest_photo_url"
+  ],
+  "optional_variables": ["party_emoji", "year"],
+  "features": [
+    "photo_upload",
+    "rsvp_form",
+    "balloons_animation",
+    "confetti_animation",
+    "responsive_design"
+  ],
+  "created_by": "admin",
+  "version": "1.0.0",
+  "last_updated": "2024-12-22"
+}

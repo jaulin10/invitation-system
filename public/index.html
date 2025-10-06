@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Système d'invitations - Connexion</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/auth.css" />
+  </head>
+  <body>
+    <!-- Particules d'arrière-plan -->
+    <div class="particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <div class="container">
+      <div class="logo">🎉</div>
+      <h1>Système d'invitations</h1>
+      <p class="subtitle">
+        Créez de magnifiques invitations personnalisées pour tous vos événements
+      </p>
+
+      <!-- Options d'authentification -->
+      <div class="auth-options">
+        <button class="auth-btn active" data-mode="login" id="loginBtn">
+          🔑 Connexion
+        </button>
+        <button class="auth-btn" data-mode="register" id="registerBtn">
+          ✨ Inscription
+        </button>
+        <button class="auth-btn" data-mode="guest" id="guestBtn">
+          👥 Invité
+        </button>
+      </div>
+
+      <!-- Formulaire de connexion -->
+      <form class="auth-form" id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">📧 Adresse email</label>
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="Entrez votre email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">🔒 Mot de passe</label>
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Entrez votre mot de passe"
+            required
+          />
+        </div>
+        <button type="submit" class="btn" id="loginSubmitBtn">
+          🚀 Accéder au tableau de bord
+        </button>
+        <div class="form-footer">
+          <a href="#" onclick="showForgotPassword()">Mot de passe oublié ?</a>
+        </div>
+      </form>
+
+      <!-- Formulaire d'inscription -->
+      <form class="auth-form hidden" id="registerForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">👤 Prénom</label>
+            <input
+              type="text"
+              id="firstName"
+              placeholder="Votre prénom"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastName">👤 Nom</label>
+            <input type="text" id="lastName" placeholder="Votre nom" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">📧 Adresse email</label>
+          <input
+            type="email"
+            id="registerEmail"
+            placeholder="Entrez votre email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">🔒 Mot de passe</label>
+          <input
+            type="password"
+            id="registerPassword"
+            placeholder="Choisissez un mot de passe"
+            required
+            minlength="8"
+          />
+          <div class="password-strength" id="passwordStrength"></div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">🔒 Confirmer le mot de passe</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirmez votre mot de passe"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="acceptTerms" required />
+            <span class="checkmark"></span>
+            J'accepte les
+            <a href="#" onclick="showTerms()">conditions d'utilisation</a>
+          </label>
+        </div>
+        <button type="submit" class="btn" id="registerSubmitBtn">
+          ✨ Créer mon compte
+        </button>
+      </form>
+
+      <!-- Formulaire invité -->
+      <form class="auth-form hidden" id="guestForm">
+        <div class="form-group">
+          <label for="invitationUrl">🎫 Lien d'invitation</label>
+          <input
+            type="text"
+            id="invitationUrl"
+            placeholder="Collez le lien de votre invitation"
+            required
+          />
+        </div>
+        <p class="help-text">
+          Vous avez reçu un lien d'invitation par email ou message ? Collez-le
+          ici pour accéder directement à l'invitation.
+        </p>
+        <button type="submit" class="btn" id="guestSubmitBtn">
+          🎊 Voir l'invitation
+        </button>
+      </form>
+
+      <!-- Formulaire mot de passe oublié -->
+      <form class="auth-form hidden" id="forgotPasswordForm">
+        <div class="form-group">
+          <label for="forgotEmail">📧 Adresse email</label>
+          <input
+            type="email"
+            id="forgotEmail"
+            placeholder="Entrez votre email"
+            required
+          />
+        </div>
+        <p class="help-text">
+          Nous vous enverrons un lien pour réinitialiser votre mot de passe.
+        </p>
+        <button type="submit" class="btn" id="forgotSubmitBtn">
+          📧 Envoyer le lien
+        </button>
+        <div class="form-footer">
+          <a href="#" onclick="showLogin()">Retour à la connexion</a>
+        </div>
+      </form>
+
+      <!-- Messages -->
+      <div id="messageContainer"></div>
+
+      <!-- Fonctionnalités -->
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">🎨</div>
+          <h3>Templates variés</h3>
+          <p>Choisissez parmi de nombreux designs pour tous les âges</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📱</div>
+          <h3>Responsive</h3>
+          <p>Parfait sur mobile, tablette et ordinateur</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📊</div>
+          <h3>Gestion RSVP</h3>
+          <p>Suivez facilement les réponses de vos invités</p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p>
+          <strong>Nouveau ici ?</strong> Créez un compte pour gérer vos
+          invitations
+        </p>
+        <p><strong>Déjà invité ?</strong> Utilisez le lien reçu par email</p>
+      </div>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+      <div class="loading-spinner"></div>
+      <p>Chargement...</p>
+    </div>
+
+    <script src="js/auth.js"></script>
+  </body>
+</html>
