@@ -208,5 +208,62 @@
     </div>
 
     <script src="js/auth.js"></script>
+    <script>
+      async function handleRSVPSubmit(e) {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const presence = formData.get('presence');
+
+        const data = {
+          attendance_status: presence === 'present' ? 'confirmed' : 'declined',
+          special_message: ''
+        };
+
+        if (presence === 'present') {
+          // Formulaire présent
+          data.father_name = formData.get('pere') || '';
+          data.mother_name = formData.get('mere') || '';
+          data.children_0_2 = parseInt(formData.get('age0_2')) || 0;
+          data.children_2_5 = parseInt(formData.get('age2_5')) || 0;
+          data.children_5_10 = parseInt(formData.get('age5_10')) || 0;
+          data.guest_name = data.father_name || data.mother_name;
+        } else {
+          // Formulaire absent
+          data.father_name = formData.get('pereAbsent') || '';
+          data.mother_name = formData.get('mereAbsent') || '';
+          data.absence_reason = formData.get('raison') || '';
+          data.gift_intent = formData.get('gift') || 'no';
+          data.gift_type = formData.get('giftType') || '';
+          data.guest_name = data.father_name || data.mother_name;
+        }
+
+        try {
+          const response = await fetch(`/api/invitations/public/${uniqueUrl}/rsvp`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            document.getElementById('confirmationMsg').classList.remove('hidden');
+            rsvpForm.reset();
+            setTimeout(() => {
+              document.getElementById('confirmationMsg').classList.add('hidden');
+            }, 5000);
+          } else {
+            alert('Erreur: ' + result.message);
+          }
+        } catch (error) {
+          console.error('Erreur RSVP:', error);
+          alert('Erreur lors de l\'envoi de votre réponse');
+        }
+      }
+
+    </script>
   </body>
 </html>

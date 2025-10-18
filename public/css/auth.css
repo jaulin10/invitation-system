@@ -242,9 +242,8 @@ h1 {
   display: none;
 }
 
-
 .custom-checkmark {
-  display: inline-flex !important;
+  display: inline-block !important;
   width: 16px !important;
   height: 16px !important;
   margin-bottom: -5.5px !important;
@@ -254,7 +253,6 @@ h1 {
   outline: none !important;
   border: none !important;
 }
-
 
 .checkmark {
   width: 20px;

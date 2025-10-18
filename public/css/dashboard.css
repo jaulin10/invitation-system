@@ -366,6 +366,18 @@ body {
   display: none;
 }
 
+.custom-checkmark {
+  display: inline-block !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin-bottom: -5.5px !important;
+}
+
+.custom-checkmark:focus, .custom-checkmark:hover {
+  outline: none !important;
+  border: none !important;
+}
+
 .checkmark {
   width: 20px;
   height: 20px;
