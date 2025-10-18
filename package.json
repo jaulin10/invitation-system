@@ -6,9 +6,10 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "migrate": "node migrations/migrate.js",
+    "migrate": "node database/migrations/migrate.js",
     "start:seed": "SEED_TEMPLATES=true node server.js",
     "dev:seed": "SEED_TEMPLATES=true nodemon server.js",
+    "admin:create": "node scripts/createAdmin.js",
     "seed:templates": "node scripts/seedTemplates.js all",
     "seed:template": "node scripts/seedTemplates.js single",
     "seed:reseed": "node scripts/seedTemplates.js reseed",
